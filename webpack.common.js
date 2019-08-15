@@ -1,21 +1,25 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const outputDir = "./dist";
+const webpack = require('webpack');
+// const outputDir = "./dist";
 
 module.exports = {
-    entry: path.resolve(__dirname, "src", "index.js"), //
+    // entry: path.resolve(__dirname, "src", "index.js"),   //
+    entry: path.join(__dirname, 'src/index.js'),
     output: {
-        path: path.join(__dirname, outputDir),
-        filename: "[name].js",
-        publicPath: "/dist/"
+        // path: path.join(__dirname, outputDir),
+        // filename: "[name].js",
+        filename: "bundle.js",
+        // publicPath: "/dist/"
+        path: path.join(__dirname, 'dist')
     },
     resolve: {
-        extensions: [".js"] // if we were using React.js, we would include ".jsx"
+        extensions: [".js"]     // if we were using React.js, we would include ".jsx"
     },
     module: {
         rules: [
             {
-                test: /\.js$/, // if we were using React.js, we would use \.jsx?$/
+                test: /\.js$/,  // if we were using React.js, we would use \.jsx?$/
                 use: {
                     loader: "babel-loader",
                     options: { presets: ["env"] } // if we were using React.js, we would include "react"
@@ -62,5 +66,7 @@ module.exports = {
         filename: "[name].css",
         chunkFilename: "[id].css",
         ignoreOrder: false // Enable to remove warnings about conflicting order
-    }), require("autoprefixer")]
+    }), require("autoprefixer"),
+        new webpack.ProgressPlugin()],
+    devtool: 'source-map'
 };

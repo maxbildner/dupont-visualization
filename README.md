@@ -7,18 +7,18 @@ of a firm comes from.
 The 5-Component Model says that there are 5 factors that explain profitability:
 ROE = 
 1. How leveraged a company is (to what extent is the firm funded by debt)
-	Measured by the Equity Multiplier
-	= Total Assets / Total Equity
+	- Measured by the Equity Multiplier
+	- Total Assets / Total Equity
 2. How efficient a company is at usting its assets to generate revenue
-	measured by Asset Turnover Ratio
-	= Revenues / Total Assets
+	- measured by Asset Turnover Ratio
+	- Revenues / Total Assets
 3. Profitability from operations (Operating Efficiency)
-	Measured by Operating Margin
-	= Operating Income / Revenue
+	- Measured by Operating Margin
+	- Operating Income / Revenue
 4. Interest Burden
-	= Earnings Before Taxes / Operating Income (or EBIT)
+	- Earnings Before Taxes / Operating Income (or EBIT)
 5. Tax Burden
-	= Net Income / EBT
+	- Net Income / EBT
 
 
 ### Project Overview:

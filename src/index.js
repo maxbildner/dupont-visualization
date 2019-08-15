@@ -1,8 +1,49 @@
 import "./styles/app.scss";
+
+import { getStock } from './api';
+import { formatStockData } from './process';
+
 // query example	== https://www.quandl.com/api/v3/datatables/SHARADAR/SF1.json?ticker=AAPL&api_key=-JuketAYn-cNXiDioYKb
 // query syntax 	== https://www.quandl.com/api/v3/datatables/${tableName}.${dataFormat}?ticker=AAPL&api_key=-JuketAYn-cNXiDioYKb
 // doc: https://www.quandl.com/databases/SF1/documentation?anchor=getting-started
 // https://jsonformatter.curiousconcept.com/
+
+function handleStockGet(e) {
+	const stockSymbolEl = document.getElementById('stock-symbol');
+	const stockSymbol = stockSymbolEl.value;
+	getStock(stockSymbol)
+	.then(stockData => {
+		const formattedData = formatStockData(stockData);
+		// instert formatted data into document here
+	});
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+	const getStockBtnEl = document.getElementById('stock-symbol');
+	getStockBtnEl.addEventListener('click', handleStockGet);
+	// hookEventListeners();
+	// let isbn = '0201558025';
+	// let ticker = 'AAPL';
+	// axios.get(`/stocks/${ticker}`)
+	// 	.then((response) => {
+	// 		console.log(response);
+	// 	})
+	// 	.catch(function (error) {
+	// 		console.log(error);
+	// 	});
+
+	
+	
+})
+
+
+
+
+
+
+
+
+
 
 
 // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
@@ -15,14 +56,14 @@ import "./styles/app.scss";
 
 
 
-const fetchFundamentalData = (ticker) => {
-	return fetch(`https://www.quandl.com/api/v3/datatables/SHARADAR/SF1.json?ticker=${ticker}&api_key=-JuketAYn-cNXiDioYKb`,
-		{ cors}
-	)
-		.then( (response) => {
-			return response.json();
-		});
-}	
+// const fetchFundamentalData = (ticker) => {
+// 	return fetch(`https://www.quandl.com/api/v3/datatables/SHARADAR/SF1.json?ticker=${ticker}&api_key=-JuketAYn-cNXiDioYKb`,
+// 		{ cors}
+// 	)
+// 		.then( (response) => {
+// 			return response.json();
+// 		});
+// }	
 
 
 
@@ -30,23 +71,6 @@ const fetchFundamentalData = (ticker) => {
 // 	.then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
 // 	.catch(error => console.error(error));
 
-// function postData(url = '', data = {}) {
-// 	// Default options are marked with *
-// 	return fetch(url, {
-// 		method: 'POST', // *GET, POST, PUT, DELETE, etc.
-// 		mode: 'cors', // no-cors, cors, *same-origin
-// 		cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-// 		credentials: 'same-origin', // include, *same-origin, omit
-// 		headers: {
-// 			'Content-Type': 'application/json',
-// 			// 'Content-Type': 'application/x-www-form-urlencoded',
-// 		},
-// 		redirect: 'follow', // manual, *follow, error
-// 		referrer: 'no-referrer', // no-referrer, *client
-// 		body: JSON.stringify(data), // body data type must match "Content-Type" header
-// 	})
-// 		.then(response => response.json()); // parses JSON response into native JavaScript objects 
-// }
 
 
 
@@ -58,7 +82,9 @@ const fetchFundamentalData = (ticker) => {
 
 
 
-// {
+
+
+// payload = {
 // 	"datatable": {
 // 		"data": [
 // 			[
@@ -1416,4 +1442,4 @@ const fetchFundamentalData = (ticker) => {
 // 	"meta": {
 // 		"next_cursor_id": null
 // 	}
-// }
+// };

@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "webpack-dev-server --watch --config webpack.dev.js",
-    "build": "webpack-dev-server --config webpack.prod.js"
+    "build": "webpack-dev-server --config webpack.prod.js",
+    "watch": "webpack --watch --mode=development"
   },
   "browserslist": [
     "last 1 version",

@@ -1,30 +1,39 @@
 import "./styles/app.scss";
-
 import { getStock } from './api';
-import { formatStockData } from './process';
+import { parseStockData, stockData } from './process';
+import axios from 'axios';
 
 // query example	== https://www.quandl.com/api/v3/datatables/SHARADAR/SF1.json?ticker=AAPL&api_key=-JuketAYn-cNXiDioYKb
 // query syntax 	== https://www.quandl.com/api/v3/datatables/${tableName}.${dataFormat}?ticker=AAPL&api_key=-JuketAYn-cNXiDioYKb
 // doc: https://www.quandl.com/databases/SF1/documentation?anchor=getting-started
 // https://jsonformatter.curiousconcept.com/
 
-function handleStockGet(e) {
-	const stockSymbolEl = document.getElementById('stock-symbol');
-	const stockSymbol = stockSymbolEl.value;
-	getStock(stockSymbol)
-	.then(stockData => {
-		const formattedData = formatStockData(stockData);
-		// instert formatted data into document here
-	});
-}
+// function handleStockGet(e) {
+// 	const stockSymbolEl = document.getElementById('stock-symbol');
+// 	const stockSymbol = stockSymbolEl.value;
+// 	// debugger
+// 	getStock(stockSymbol)
+// 		.then(stockData => {
+// 			// debugger
+// 			const formattedData = formatStockData(stockData);
+// 			// insert formatted data into document here
+// 		});
+// }
 
 document.addEventListener('DOMContentLoaded', () => {
-	const getStockBtnEl = document.getElementById('stock-symbol');
-	getStockBtnEl.addEventListener('click', handleStockGet);
-	// hookEventListeners();
-	// let isbn = '0201558025';
+	// const getStockBtnEl = document.getElementById('stock-symbol');
+	// getStockBtnEl.addEventListener('click', handleStockGet);
+	
 	// let ticker = 'AAPL';
-	// axios.get(`/stocks/${ticker}`)
+	// axios.get(`https://www.quandl.com/api/v3/datatables/SHARADAR/SF1.json?=${ticker}&api_key=-JuketAYn-cNXiDioYKb`,
+	// 	{
+	// 		method: 'HEAD',
+	// 		mode: 'no-cors',
+	// 		headers: {
+	// 			'Access-Control-Allow-Origin': '*'
+	// 		}
+	// 	}
+	// )
 	// 	.then((response) => {
 	// 		console.log(response);
 	// 	})
@@ -32,8 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
 	// 		console.log(error);
 	// 	});
 
-	
-	
+	// fetch(`https://www.quandl.com/api/v3/datatables/SHARADAR/SF1.json?ticker=${ticker}&api_key=-JuketAYn-cNXiDioYKb`)
+	// 	.then( (response) => {
+	// 		debugger
+	// 		return response.json();
+	// 	});
+
+	parseStockData(stockData);
 })
 
 

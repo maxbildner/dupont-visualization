@@ -1,53 +1,40 @@
 import "./styles/app.scss";
-import { getStock } from './api';
-import { parseStockData, stockData } from './process';
-import axios from 'axios';
+import createSimpleGraph from './simple_graph';
+
+//import { getStock } from './api';
+import allStockData from './stock_data.json';
+import { parseStockData } from './process';
 
 // query example	== https://www.quandl.com/api/v3/datatables/SHARADAR/SF1.json?ticker=AAPL&api_key=-JuketAYn-cNXiDioYKb
 // query syntax 	== https://www.quandl.com/api/v3/datatables/${tableName}.${dataFormat}?ticker=AAPL&api_key=-JuketAYn-cNXiDioYKb
 // doc: https://www.quandl.com/databases/SF1/documentation?anchor=getting-started
 // https://jsonformatter.curiousconcept.com/
 
-// function handleStockGet(e) {
-// 	const stockSymbolEl = document.getElementById('stock-symbol');
-// 	const stockSymbol = stockSymbolEl.value;
-// 	// debugger
-// 	getStock(stockSymbol)
-// 		.then(stockData => {
-// 			// debugger
-// 			const formattedData = formatStockData(stockData);
-// 			// insert formatted data into document here
-// 		});
-// }
+function handleStockGet(e) {
+	const stockSymbolEl = document.getElementById('stock-symbol');
+	const stockSymbol = stockSymbolEl.value;
+	// getStock(stockSymbol)
+	// 	.then(stockData => {
+	// 		// debugger
+	// 		const formattedData = parseStockData(stockData);
+	// 		console.log(stockData);
+	// 		// insert formatted data into document here
+	// });
+	const stockData = allStockData[stockSymbol];
+	if (!stockData) {
+		console.log(`Stock ${stockSymbol} not found.`);
+		return;
+	}
+	
+	// const formattedData = parseStockData(stockData);
+	console.log(stockData);
+}
 
 document.addEventListener('DOMContentLoaded', () => {
-	// const getStockBtnEl = document.getElementById('stock-symbol');
-	// getStockBtnEl.addEventListener('click', handleStockGet);
-	
-	// let ticker = 'AAPL';
-	// axios.get(`https://www.quandl.com/api/v3/datatables/SHARADAR/SF1.json?=${ticker}&api_key=-JuketAYn-cNXiDioYKb`,
-	// 	{
-	// 		method: 'HEAD',
-	// 		mode: 'no-cors',
-	// 		headers: {
-	// 			'Access-Control-Allow-Origin': '*'
-	// 		}
-	// 	}
-	// )
-	// 	.then((response) => {
-	// 		console.log(response);
-	// 	})
-	// 	.catch(function (error) {
-	// 		console.log(error);
-	// 	});
+	const getStockBtnEl = document.getElementById('get-stock');
+	getStockBtnEl.addEventListener('click', handleStockGet);
 
-	// fetch(`https://www.quandl.com/api/v3/datatables/SHARADAR/SF1.json?ticker=${ticker}&api_key=-JuketAYn-cNXiDioYKb`)
-	// 	.then( (response) => {
-	// 		debugger
-	// 		return response.json();
-	// 	});
-
-	parseStockData(stockData);
+	createSimpleGraph();
 })
 
 

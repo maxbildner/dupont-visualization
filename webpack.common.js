@@ -9,9 +9,9 @@ module.exports = {
     output: {
         // path: path.join(__dirname, outputDir),
         // filename: "[name].js",
-        path: path.join(__dirname, 'dist'),
-        filename: "[name].js",
-        publicPath: "/dist/",
+        filename: "bundle.js",
+        // publicPath: "/dist/"
+        path: path.join(__dirname, 'dist')
     },
     resolve: {
         extensions: [".js"]     // if we were using React.js, we would include ".jsx"

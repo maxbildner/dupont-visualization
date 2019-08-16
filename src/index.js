@@ -25,9 +25,11 @@ function handleStockGet(e) {
 		console.log(`Stock ${stockSymbol} not found.`);
 		return;
 	}
+
+	// console.log(stockData);
+	const formattedData = parseStockData(stockData);
+	// console.log(formattedData);
 	
-	// const formattedData = parseStockData(stockData);
-	console.log(stockData);
 }
 
 document.addEventListener('DOMContentLoaded', () => {

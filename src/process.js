@@ -1569,40 +1569,39 @@
 // }
 
 
-data = {
-    AAPL: {
-        2018: {
-            price: 152,
-            eps: 2.52
-        }
-    }
-}
-Object.keys(data)[0];
+// data = {
+//     AAPL: {
+//         2018: {
+//             price: 152,
+//             eps: 2.52
+//         }
+//     }
+// }
+// Object.keys(data)[0];
 
 
 
 // NEW PARSING FUNCTION
-export const parseStockData = (stockData) => {  // object with only 1 key
+// 5 point du-pont
+export const parseStockData = (stockData) => {  // 8 keys that refer to year data
+    // debugger
 
-    let symbol = Object.keys(stockData)[0];     // grab symbol in stock data object
+    // let symbol = Object.keys(stockData)[0];     // grab symbol in stock data object
+
+    let yearData = stockData[2018];
+    let assets = yearData.assets;
+    let ebt = yearData.ebt;
+    let ebit = yearData.ebit;
+    let ebitda = yearData.ebitda;
+    let ebitdaMargin = yearData.ebitdamargin;
+    let eps = yearData.eps;
+    let equity = yearData.equity;
+    let netIncome = yearData.netinc;
+    let operatingIncome = yearData.opinc;
+    let revenue = yearData.revenue;
+    let roa = yearData.roa;
+    // let bvps = yearData[bvps];
     
-    
-    // 0 == most recently reported fiscal year (2018)
-    let dataArray = stockData.datatable.data;   // array of 7 rows (years of data)
-    let assets = dataArray[0][7];
-    // let assetTurnover = dataArray[0][11];
-    // let bvps = dataArray[0][12];
-    let ebt = dataArray[0][34];
-    let ebit = dataArray[0][29];
-    let ebitda = dataArray[0][30];
-    let ebitdaMargin = dataArray[0][31];
-    let eps = dataArray[0][35];
-    let equity = dataArray[0][38];
-    let netIncome = dataArray[0][71];
-    let operatingIncome = dataArray[0][78];
-    let revenue = dataArray[0][92];
-    let roa = dataArray[0][94];
-    // let roe = dataArray[0][95];
 
     // 5 POINT ANALYSIS
     // Equity Multiplier
@@ -1631,42 +1630,8 @@ export const parseStockData = (stockData) => {  // object with only 1 key
     let taxBurden = netIncome / ebt;
     // 0.8165781929413056
     
-    let roe5 = leverage * assetTurnover * operatingMargin * interestBurden * taxBurden;
+    let roe = leverage * assetTurnover * operatingMargin * interestBurden * taxBurden;
     // debugger
 
-    // canvas size = 300px 300px               = 90k px^2
-    let leveragePchange = .4471;            // 40k^2      -> 200px 200px
-    let assetTurnoverPchange = .4037;
-    let operatingMarginPchange = .0213;     // negative
-    let interestBurdenPchange = .0212;      // negative
-    let taxBurdenPchange = .1916;
-
-    let c = document.getElementById("myCanvas");
-    let ctx = c.getContext("2d");
-
-
-
-    // Red rectangle  = leverage
-    ctx.beginPath();
-    ctx.lineWidth = "76";
-    ctx.strokeStyle = "#6d1500";
-    // ctx.rect(5, 5, 290, 140);       // (x, y, width, height)
-    ctx.rect(0, 0, 300, 300);          // (x, y, width, height)
-    ctx.stroke();
-
-    // Green rectangle
-    ctx.beginPath();
-    ctx.lineWidth = "4";
-    ctx.strokeStyle = "green";
-    ctx.rect(30, 30, 50, 50);
-    ctx.stroke();
-
-    // Blue rectangle
-    ctx.beginPath();
-    ctx.lineWidth = "10";
-    ctx.strokeStyle = "blue";
-    ctx.rect(50, 50, 150, 80);
-    ctx.stroke();
-
-    return roe5;    // => 0.5403208743422838
+    return { leverage, assetTurnover, operatingMargin, interestBurden, taxBurden, roe };
 }

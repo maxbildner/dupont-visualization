@@ -19,19 +19,41 @@ function handleStockGet(e) {
 		console.log(`Stock ${stockSymbol} not found.`);
 		return;
 	}
-	const formattedData = parseStockData(stockData);			// not being used yet
-
-	let data1 = [{ value: "42", label: "parturient montes", valueSuffix: " things" }, { value: "69", label: "id, mollis nec", valueSuffix: " things" }, { value: "29", label: "lacus. Ut", valueSuffix: " things" }, { value: "52", label: "a ultricies adipiscing", valueSuffix: " things" }];
+	const data = parseStockData(stockData);			// not being used yet
+	// ex. if AAPL, duPontData == { 
+		// leverage: 3.4133013523477094, 
+		// assetTurnover: 0.7262150522933899, 
+		// operatingMargin: 0.26694026619477024, 
+		// interestBurden: 1.0282800643177523, 
+		// taxBurden: 0.8165781929413056 }
+	// Tax Burden = 19.16       Interest Burden = % -2.12       
+	// EBIT Margin = % -2.13    Asset Turnover = % 40.37 
+	// Leverage = % 44.71 
+	// each element represents the extent to which (out of all 5 ratios) that ratio contributed to the change in ROE
+	// let rawData = [ 19.16, -2.12, -2.13, 40.37, 44.71 ];         // negative rectangle value not valid??!
+	let rawData = [19.16, 2.12, 2.13, 40.37, 44.71];              	// for now make postiive
+	// var rawData = { time: 40, money: 90, food: 30, sleep: 60 };	// rawData MUST BE ARRAY NOT OBJ
+	
+	// let data1 = [ 
+	// 	{ value: "42", label: "Tax Burden", valueSuffix: " %" }, 
+	// 	{ value: "69", label: "Asset Turnover", valueSuffix: " %" }, 
+	// 	{ value: "29", label: "EBIT Margin", valueSuffix: " %" }, 
+	// 	{ value: "52", label: "Leverage", valueSuffix: " %" }
+	// ];
+	let data1 = [ 
+		{ value: `${100*data.taxBurden}`, label: "Tax Burden", valueSuffix: " %" }, 
+		{ value: `${100*data.assetTurnover}`, label: "Asset Turnover", valueSuffix: " %" }, 
+		{ value: `${100*data.operatingMargin}`, label: "EBIT Margin", valueSuffix: " %" }, 
+		{ value: `${100*data.leverage}`, label: "Leverage", valueSuffix: " %" }
+	];
 	let config1 = rectangularAreaChartDefaultSettings();
 	config1.expandFromLeft = false;
 	config1.colorsScale = d3.scale.category20b();
 	config1.maxValue = 100;
 	loadRectangularAreaChart("rectangularareachart1", data1, config1);
 
-	// renderAlbersGraph(formattedData);
+	// renderAlbersGraph(data);
 }
-
-
 
 document.addEventListener('DOMContentLoaded', () => {
 	const getStockbtnEl = document.getElementById('get-stock');

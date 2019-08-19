@@ -1,6 +1,6 @@
 import "./styles/app.scss";
-import createSimpleGraph from './simple_graph';
-
+import { rectangularAreaChartDefaultSettings,
+	loadRectangularAreaChart } from './rectangularAreaChart';
 //import { getStock } from './api';
 import allStockData from './stock_data.json';
 import { parseStockData } from './process';
@@ -13,32 +13,30 @@ import { parseStockData } from './process';
 function handleStockGet(e) {
 	const stockSymbolEl = document.getElementById('stock-symbol');
 	const stockSymbol = stockSymbolEl.value;
-	// getStock(stockSymbol)
-	// 	.then(stockData => {
-	// 		// debugger
-	// 		const formattedData = parseStockData(stockData);
-	// 		console.log(stockData);
-	// 		// insert formatted data into document here
-	// });
+
 	const stockData = allStockData[stockSymbol];
-	if (!stockData) {
+	if (!stockData) {											// if user types in stock not in free api
 		console.log(`Stock ${stockSymbol} not found.`);
 		return;
 	}
+	const formattedData = parseStockData(stockData);			// not being used yet
 
-	// console.log(stockData);
-	const formattedData = parseStockData(stockData);
-	// console.log(formattedData);
-	
+	let data1 = [{ value: "42", label: "parturient montes", valueSuffix: " things" }, { value: "69", label: "id, mollis nec", valueSuffix: " things" }, { value: "29", label: "lacus. Ut", valueSuffix: " things" }, { value: "52", label: "a ultricies adipiscing", valueSuffix: " things" }];
+	let config1 = rectangularAreaChartDefaultSettings();
+	config1.expandFromLeft = false;
+	config1.colorsScale = d3.scale.category20b();
+	config1.maxValue = 100;
+	loadRectangularAreaChart("rectangularareachart1", data1, config1);
+
+	// renderAlbersGraph(formattedData);
 }
 
+
+
 document.addEventListener('DOMContentLoaded', () => {
-	const getStockBtnEl = document.getElementById('get-stock');
-	getStockBtnEl.addEventListener('click', handleStockGet);
-
-	createSimpleGraph();
+	const getStockbtnEl = document.getElementById('get-stock');
+	getStockbtnEl.addEventListener('click', handleStockGet);
 })
-
 
 
 

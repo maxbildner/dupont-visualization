@@ -1581,14 +1581,11 @@
 
 
 
-// NEW PARSING FUNCTION
-// 5 point du-pont
-export const parseStockData = (stockData) => {  // 8 keys that refer to year data
-    // debugger
 
-    // let symbol = Object.keys(stockData)[0];     // grab symbol in stock data object
 
-    let yearData = stockData[2018];
+
+function calculateROE(stockData, year) {          // returns obj of ROE composition for a given period
+    let yearData = stockData[year];
     let assets = yearData.assets;
     let ebt = yearData.ebt;
     let ebit = yearData.ebit;
@@ -1601,7 +1598,7 @@ export const parseStockData = (stockData) => {  // 8 keys that refer to year dat
     let revenue = yearData.revenue;
     let roa = yearData.roa;
     // let bvps = yearData[bvps];
-    
+
 
     // 5 POINT ANALYSIS
     // Equity Multiplier
@@ -1622,16 +1619,33 @@ export const parseStockData = (stockData) => {  // 8 keys that refer to year dat
     // Interest Burden
     // = EBT / EBIT (or Operating Income if ebit not available)
     // let interestBurden = ebt/ebit;
-    let interestBurden = ebt/operatingIncome;
+    let interestBurden = ebt / operatingIncome;
     // 1.0282800643177523
 
     // Tax Burden
     // = Net Income / EBT
     let taxBurden = netIncome / ebt;
     // 0.8165781929413056
-    
+
     let roe = leverage * assetTurnover * operatingMargin * interestBurden * taxBurden;
     // debugger
 
     return { leverage, assetTurnover, operatingMargin, interestBurden, taxBurden, roe };
 }
+
+
+
+
+
+
+// NEW PARSING FUNCTION
+// 5 point du-pont
+export const parseStockData = (stockData) => {          // 8 keys that refer to year data
+    // debugger
+
+    let roeCurrent = calculateROE(stockData, 2018);     // hard coding for now
+    return roeCurrent;
+
+}
+
+

@@ -1,29 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <script src="https://d3js.org/d3.v3.min.js" language="JavaScript"></script>
     <link rel="stylesheet" href="./dist/main.css" />
-    <style>
-      .rectangularAreaChartText {
-        font-family: Helvetica;
-        font-size: 12px;
-      }
-    </style>
-    <title>New JS Project!</title>
-  </head>
-  
-  <body>
-    <h3>Accounting Data Visualizer</h3>
-    <label for="">Input Stock Ticker (ex. AAPL)</label>
-    <input type="text" id="stock-symbol">
-    <button id="get-stock">LOOKUP</button>
-    <svg id="rectangularareachart1" width="400" height="240"></svg>
-    <svg id="rectangularareachart2" width="400" height="240"></svg>
-    
-    <script src="./dist/bundle.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js" language="JavaScript"></script>
+    <title>New JS Project</title>
+</head>
 
-  </body>
+<body>
+    <div id="app">
+        <h3>Accounting Data Visualizer</h3>
+        <label for="">Input Stock Ticker (ex. AAPL)</label>
+        <input type="text" id="stock-symbol">
+        <button id="get-stock">LOOKUP</button>
+        <svg id="rectangularareachart1" width="400" height="240"></svg>
+        <svg id="rectangularareachart2" width="400" height="240"></svg>
+    </div>
+    <script src="./dist/main.js"></script>
+</body>
 </html>

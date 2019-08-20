@@ -186,12 +186,12 @@ export const loadRectangularAreaChart = (elementId, data, settings) => {
     // Add the category label text.
     var labelPath = boxGroup.append("text")
         .attr("class", "rectangularAreaChartText")
-        .style("fill", function (d) { 
+        .style("fill", function (d) {
             // debugger 
             // d        => {value: "40.37", label: "Asset Turnover", valueSuffix: " %"}
             // d.label  => "Leverage"                   //=> for 1st iteration
             // settings.textColorScale(d.label)         //=> 'fff'    hex color to fill square
-            return settings.textColorScale(d.label); 
+            return settings.textColorScale(d.label);
         })
         .attr("id", function (d, i) { return elementId + "LabelText" + i; })
         .append("textPath")

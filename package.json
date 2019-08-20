@@ -2,19 +2,18 @@
   "name": "dupont-visualization",
   "version": "1.0.0",
   "description": "### Background Info:  The DuPont Analysis attempts to explain where the profitabiltiy (measured in Return on Equity ROE) of a firm comes from.",
-  "main": "app.js",
-  "scripts": {
-    "start": "webpack-dev-server --watch --config webpack.dev.js",
-    "build": "webpack-dev-server --config webpack.prod.js"
-  },
+  "main": "index.js",
   "browserslist": [
     "last 1 version",
     "> 1%",
     "maintained node versions",
     "not dead"
   ],
-  "engines": {
-    "node": ">=8.1.0"
+  "scripts": {
+    "start": "webpack-dev-server --config webpack.dev.js",
+    "watch": "webpack --watch --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js  --optimize-minimize",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -29,24 +28,18 @@
   "homepage": "https://github.com/maxbildner/dupont-visualization#readme",
   "dependencies": {
     "autoprefixer": "^9.6.1",
-    "axios": "^0.19.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "css-loader": "^3.2.0",
-    "d3": "^5.9.7",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.12.0",
     "postcss-loader": "^3.0.0",
-    "sass-loader": "^7.2.0",
+    "sass-loader": "^7.3.1",
     "style-loader": "^1.0.0",
     "webpack": "^4.39.2",
-    "webpack-cli": "^3.3.6",
+    "webpack-cli": "^3.3.7",
     "webpack-dev-server": "^3.8.0",
     "webpack-merge": "^4.2.1"
-  },
-  "devDependencies": {
-    "nodemon": "^1.19.1",
-    "task-queue-async": "^1.0.1"
   }
 }

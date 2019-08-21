@@ -11,7 +11,7 @@ import { getStock } from './api';
 
 function handleStockGet(e) {
     const stockSymbolEl = document.getElementById('stock-symbol');
-    const stockSymbol = stockSymbolEl.value;    // ex. 'AAPL'
+    const stockSymbol = stockSymbolEl.value;            // ex. 'AAPL'
 
     // DOESN'T WORK
     // 1
@@ -29,13 +29,14 @@ function handleStockGet(e) {
 
 
     getStock(stockSymbol).then(
-        result => {                     // result.datatable == {data: Array(8), columns: Array(111)}  
-        // ex. result.datatable.data[0][7] => assets for apple for 2018        
-        renderAlbers();
+        response => {                                     // response.datatable == {data: Array(8), columns: Array(111)}  
+        // ex. response.datatable.data[0][7] => assets for apple for 2018   
+        let data = parseStockData(response);     
+        renderAlbers(data);
         // move all code below into function and call function here
     })
 
-    // result.datatable.columns[0]
+    // response.datatable.columns[0]
         
 
 

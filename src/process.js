@@ -1583,22 +1583,94 @@
 
 
 
+// Function for testing (uses hard coded data NOT API response data)
+// function calculateROE(stockData, year) {          // returns obj of ROE composition for a given period
+//     let yearData = stockData[year];
+//     let assets = yearData.assets;
+//     let ebt = yearData.ebt;
+//     let ebit = yearData.ebit;
+//     let ebitda = yearData.ebitda;
+//     let ebitdaMargin = yearData.ebitdamargin;
+//     let eps = yearData.eps;
+//     let equity = yearData.equity;
+//     let netIncome = yearData.netinc;
+//     let operatingIncome = yearData.opinc;
+//     let revenue = yearData.revenue;
+//     let roa = yearData.roa;
+//     // let bvps = yearData[bvps];
 
-function calculateROE(stockData, year) {          // returns obj of ROE composition for a given period
-    let yearData = stockData[year];
-    let assets = yearData.assets;
-    let ebt = yearData.ebt;
-    let ebit = yearData.ebit;
-    let ebitda = yearData.ebitda;
-    let ebitdaMargin = yearData.ebitdamargin;
-    let eps = yearData.eps;
-    let equity = yearData.equity;
-    let netIncome = yearData.netinc;
-    let operatingIncome = yearData.opinc;
-    let revenue = yearData.revenue;
-    let roa = yearData.roa;
-    // let bvps = yearData[bvps];
 
+//     // 5 POINT ANALYSIS
+//     // Equity Multiplier
+//     // = Total Assets / Total Equity
+//     let leverage = assets / equity;
+//     // 3.4133013523477094
+
+//     // Asset Turnover
+//     // = Revenue / Total Assets
+//     let assetTurnover = revenue / assets;
+//     // 0.7262150522933899
+
+//     // Operating Margin
+//     // = Operating Income / Revenue
+//     let operatingMargin = operatingIncome / revenue;
+//     // 0.26694026619477024
+
+//     // Interest Burden
+//     // = EBT / EBIT (or Operating Income if ebit not available)
+//     // let interestBurden = ebt/ebit;
+//     let interestBurden = ebt / operatingIncome;
+//     // 1.0282800643177523
+
+//     // Tax Burden
+//     // = Net Income / EBT
+//     let taxBurden = netIncome / ebt;
+//     // 0.8165781929413056
+
+//     let roe = leverage * assetTurnover * operatingMargin * interestBurden * taxBurden;
+//     // debugger
+
+//     return { leverage, assetTurnover, operatingMargin, interestBurden, taxBurden, roe };
+// }
+
+
+
+const yearMapping = {
+    2018: 0,
+    2017: 1,
+    2016: 2,
+    2015: 3,
+    2014: 4,
+    2013: 5,
+    2012: 6,
+    2011: 7,
+}
+
+
+
+function calculateROE(stockData, year=2018) {            // returns obj of ROE composition for a given period
+    // stockData.datatable == {data: Array(8), columns: Array(111)}
+    
+    // 0 == most recently reported fiscal year (2018)
+    let idxYr = yearMapping[year]
+    let dataMatrix = stockData.datatable.data;       // 2D array of 7 rows (years of data)
+    let dataArray = dataMatrix[idxYr];
+    // debugger
+    let assets = dataArray[7];
+    // let assetTurnover = dataArray[11];
+    // let bvps = dataArray[12];
+    let ebt = dataArray[34];
+    let ebit = dataArray[29];
+    let ebitda = dataArray[30];
+    let ebitdaMargin = dataArray[31];
+    let eps = dataArray[35];
+    let equity = dataArray[38];
+    let netIncome = dataArray[71];
+    let operatingIncome = dataArray[78];
+    let revenue = dataArray[92];
+    let roa = dataArray[94];
+    // let roe = dataArray[95];
+    // debugger
 
     // 5 POINT ANALYSIS
     // Equity Multiplier
@@ -1619,7 +1691,7 @@ function calculateROE(stockData, year) {          // returns obj of ROE composit
     // Interest Burden
     // = EBT / EBIT (or Operating Income if ebit not available)
     // let interestBurden = ebt/ebit;
-    let interestBurden = ebt / operatingIncome;
+    let interestBurden = ebt/operatingIncome;
     // 1.0282800643177523
 
     // Tax Burden
@@ -1630,9 +1702,31 @@ function calculateROE(stockData, year) {          // returns obj of ROE composit
     let roe = leverage * assetTurnover * operatingMargin * interestBurden * taxBurden;
     // debugger
 
-    return { leverage, assetTurnover, operatingMargin, interestBurden, taxBurden, roe };
+    let dupont5 = {
+        leverage,
+        assetTurnover,
+        operatingMargin,
+        interestBurden,
+        taxBurden,
+        roe
+    }
+
+    // debugger
+    return dupont5
+
+    // canvas size = 300px 300px               = 90k px^2
+    // let leveragePchange = .4471;            // 40k^2      -> 200px 200px
+    // let assetTurnoverPchange = .4037;
+    // let operatingMarginPchange = .0213;     // negative
+    // let interestBurdenPchange = .0212;      // negative
+    // let taxBurdenPchange = .1916;
 }
 
+
+
+const calculateFractionalArea = () => {
+
+}
 
 
 
@@ -1642,10 +1736,62 @@ function calculateROE(stockData, year) {          // returns obj of ROE composit
 // 5 point du-pont
 export const parseStockData = (stockData) => {          // 8 keys that refer to year data
     // debugger
+    // stockData.datatable == {data: Array(8), columns: Array(111)}
 
-    let roeCurrent = calculateROE(stockData, 2018);     // hard coding for now
-    return roeCurrent;
+    let roeCurrent = calculateROE(stockData, 2018);     
+    // roeCurrent == {leverage: 3.4133013523477094, assetTurnover: 0.7262150522933899, operatingMargin: 0.26694026619477024, interestBurden: 1.0282800643177523, taxBurden: 0.8165781929413056, …}
+    let roePrevious = calculateROE(stockData, 2017);     
+    // debugger
 
+    let leverageCurrent = roeCurrent.leverage;
+    let leveragePrevious = roePrevious.leverage;
+    let leveragePrctChange = leverageCurrent/leveragePrevious - 1;
+
+    let assetTurnoverCurrent = roeCurrent.assetTurnover;
+    let assetTurnoverPrevious = roePrevious.assetTurnover;
+    let assetTurnoverPrctChange = assetTurnoverCurrent / assetTurnoverPrevious - 1;
+
+    let operatingMarginCurrent = roeCurrent.operatingMargin;
+    let operatingMarginPrevious = roePrevious.operatingMargin;
+    let operatingMarginPrctChange = operatingMarginCurrent / operatingMarginPrevious - 1;
+    
+    let interestBurdenCurrent = roeCurrent.interestBurden;
+    let interestBurdenPrevious = roePrevious.interestBurden;
+    let interestBurdenPrctChange = interestBurdenCurrent / interestBurdenPrevious - 1;
+
+    let taxBurdenCurrent = roeCurrent.taxBurden;
+    let taxBurdenPrevious = roePrevious.taxBurden;
+    let taxBurdenPrctChange = taxBurdenCurrent / taxBurdenPrevious - 1;
+
+    let sumPrctChange = (
+        leveragePrctChange +
+        assetTurnoverPrctChange +
+        operatingMarginPrctChange +
+        interestBurdenPrctChange +
+        taxBurdenPrctChange
+    );
+
+    let leverage = Math.abs(leveragePrctChange/sumPrctChange);
+    let assetTurnover = Math.abs(assetTurnoverPrctChange/sumPrctChange);
+    let operatingMargin = Math.abs(operatingMarginPrctChange/sumPrctChange);
+    let interestBurden = Math.abs(interestBurdenPrctChange/sumPrctChange);
+    let taxBurden = Math.abs(taxBurdenPrctChange/sumPrctChange);
+    let roe5 = Math.abs(roeCurrent.roe/roePrevious.roe - 1);
+
+    let formattedData = {
+        leverage,
+        assetTurnover,
+        operatingMargin,
+        interestBurden,
+        taxBurden,
+        roe5
+    }
+
+    // debugger
+    // formattedData == {leverage: 0.463933027478709, assetTurnover: 0.4002680756696468, operatingMargin: -0.00525464861268168, interestBurden: -0.03337927195044271, taxBurden: 0.17443281741476854, …}
+
+    return formattedData;       // [123, 12, 312,123 123, ]
+    // { leverage, assetTurnover, operatingMarign, ... }
 }
 
 

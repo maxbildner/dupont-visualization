@@ -6,7 +6,10 @@ import {
 import allStockData from './stock_data.json';
 import { parseStockData } from './process';
 import { getStock } from './api';
-import { showLoadingAnimation, hideLoading } from './loading';
+import { 
+    showLoadingAnimation, 
+    hideLoading,
+    isValid } from './loading';
 import "./styles/app.scss";
 
 
@@ -33,10 +36,15 @@ function handleStockGet(e) {
     getStock(stockSymbol).then(
         response => {                                     // response.datatable == {data: Array(8), columns: Array(111)}  
         // ex. response.datatable.data[0][7] => assets for apple for 2018   
+        // debugger
+
         hideLoading();
-        let data = parseStockData(response);     
-        renderAlbers(data);
-        // move all code below into function and call function here
+        if (isValid(response, stockSymbol)) {
+            let data = parseStockData(response);     
+            renderAlbers(data);
+        } else {
+            alert('STOCK NOT FOUND');
+        }
     })
 
     // response.datatable.columns[0]
@@ -46,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const getStockbtnEl = document.getElementById('get-stock');
     getStockbtnEl.addEventListener('click', handleStockGet);
 })
+
 
 
 

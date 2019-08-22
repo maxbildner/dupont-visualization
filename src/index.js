@@ -6,12 +6,15 @@ import {
 import allStockData from './stock_data.json';
 import { parseStockData } from './process';
 import { getStock } from './api';
+import { showLoadingAnimation, hideLoading } from './loading';
 import "./styles/app.scss";
 
 
 function handleStockGet(e) {
     const stockSymbolEl = document.getElementById('stock-symbol');
     const stockSymbol = stockSymbolEl.value;            // ex. 'AAPL'
+
+    showLoadingAnimation();
 
     // DOESN'T WORK
     // 1
@@ -31,6 +34,7 @@ function handleStockGet(e) {
     getStock(stockSymbol).then(
         response => {                                     // response.datatable == {data: Array(8), columns: Array(111)}  
         // ex. response.datatable.data[0][7] => assets for apple for 2018   
+        hideLoading();
         let data = parseStockData(response);     
         renderAlbers(data);
         // move all code below into function and call function here

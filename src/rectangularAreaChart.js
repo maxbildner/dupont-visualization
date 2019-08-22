@@ -333,13 +333,6 @@ export const renderAlbers = (data) => {
     	{ value: `${100*data.operatingMargin}`, label: "EBIT Margin", valueSuffix: " %" }, 
     	{ value: `${100*data.leverage}`, label: "Leverage", valueSuffix: " %" }
     ];
-    // let data1 = [
-    //     { value: `${rawData[0]}`, label: "Tax Burden", valueSuffix: " %" },
-    //     { value: `${rawData[3]}`, label: "Asset Turnover", valueSuffix: " %" },
-    //     { value: `${rawData[2]}`, label: "EBIT Margin", valueSuffix: " %" },
-    //     { value: `${rawData[4]}`, label: "Leverage", valueSuffix: " %" },
-    //     // { value: `10`, label: "Interest Burden", valueSuffix: " %" }
-    // ];
     let config1 = rectangularAreaChartDefaultSettings();
     config1.expandFromLeft = false;
     config1.colorsScale = d3.scale.category20b();
@@ -354,13 +347,7 @@ export const renderAlbers = (data) => {
 
 
 
- 
-    // let data2 = [
-    //     { value: `${rawData[0]}`, label: "Tax Burden" },
-    //     { value: `${rawData[3]}`, label: "Asset Turnover" },
-    //     { value: `${rawData[2]}`, label: "EBIT Margin" },
-    //     { value: `${rawData[4]}`, label: "Leverage" }
-    // ];
+
     let config2 = rectangularAreaChartDefaultSettings();
     // config2.colorsScale = d3.scale.ordinal().range(["#fc8d59", "#ffffbf", "#91bfdb"]); //palette from colorbrewer https://github.com/mbostock/d3/tree/master/lib/colorbrewer
     config2.colorsScale = d3.scale.ordinal().range(["#00441b", "#1b7837", "#5aae61", "#a6dba0"]); //palette from colorbrewer https://github.com/mbostock/d3/tree/master/lib/colorbrewer
@@ -377,12 +364,6 @@ export const renderAlbers = (data) => {
 
 
 
-    // let data3 = [
-    //     { value: `${rawData[0]}`, label: "Tax Burden" },
-    //     { value: `${rawData[3]}`, label: "Asset Turnover" },
-    //     { value: `${rawData[2]}`, label: "EBIT Margin" },
-    //     { value: `${rawData[4]}`, label: "Leverage" }
-    // ];
     let config3 = rectangularAreaChartDefaultSettings();
     config3.expandFromLeft = false;
     config3.expandFromTop = true;
@@ -393,13 +374,6 @@ export const renderAlbers = (data) => {
     loadRectangularAreaChart("rectangularareachart3", data3, config3);
 
 
-
-    // let data4 = [
-    //     { value: `${rawData[0]}`, label: "Tax Burden" },
-    //     { value: `${rawData[3]}`, label: "Asset Turnover" },
-    //     { value: `${rawData[2]}`, label: "EBIT Margin" },
-    //     { value: `${rawData[4]}`, label: "Leverage" }
-    // ];
     let config4 = rectangularAreaChartDefaultSettings();
     config4.expandFromLeft = true;
     config4.expandFromTop = true;

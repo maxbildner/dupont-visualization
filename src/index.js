@@ -6,7 +6,7 @@ import {
 import allStockData from './stock_data.json';
 import { parseStockData } from './process';
 import { getStock } from './api';
-// import "./styles/app.scss";
+import "./styles/app.scss";
 
 
 function handleStockGet(e) {

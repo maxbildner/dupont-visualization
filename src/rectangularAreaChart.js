@@ -65,7 +65,7 @@ export const loadRectangularAreaChart = (elementId, data, settings) => {
     };
 
     if (settings == null) settings = rectangularAreaChartDefaultSettings();
-
+    // debugger
     var svg = d3.select("#" + elementId);
 
     // Some dummy text is needed so that we can get the text height before attaching text to any paths.

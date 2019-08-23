@@ -57,7 +57,7 @@ function handleStockGet(e) {
     // svg4.setAttribute("height", "240");
     
     // let div = document.getElementById('container')
-    // debugger
+    // // debugger
 
     // div.appendChild(svg1);
     // div.appendChild(svg2);

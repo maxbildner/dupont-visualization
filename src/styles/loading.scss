@@ -1,0 +1,105 @@
+#loading-animation {
+    // visibility: hidden;
+    visibility: hidden;
+    // color: red;
+    width: 100px;
+    height: 100px;
+
+    border: 5px solid grey;
+    position: absolute;
+    margin: 0 auto;
+
+    border-top: 5px solid darkblue;
+    border-radius: 100%;
+
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    } to {
+        transform: rotate(360deg);
+    }
+}
+
+#loading-animation.show {
+    visibility: visible;
+}
+
+
+
+
+
+
+svg#rectangularareachart1, svg#rectangularareachart2 {
+    position: relative;
+    top: 4px;
+}
+
+
+
+
+// .loader {
+//   display: inline-block;
+//   width: 30px;
+//   height: 30px;
+//   position: relative;
+// //   border: 4px solid #Fff;
+//   border: 4px solid navy;
+//   top: 50%;
+//   animation: loader 2s infinite ease;
+// }
+
+// .loader-inner {
+//   vertical-align: top;
+//   display: inline-block;
+//   width: 100%;
+// //   background-color: #fff;
+//   background-color: navy;
+//   animation: loader-inner 2s infinite ease-in;
+// }
+
+// @keyframes loader {
+//   0% {
+//     transform: rotate(0deg);
+//   }
+  
+//   25% {
+//     transform: rotate(180deg);
+//   }
+  
+//   50% {
+//     transform: rotate(180deg);
+//   }
+  
+//   75% {
+//     transform: rotate(360deg);
+//   }
+  
+//   100% {
+//     transform: rotate(360deg);
+//   }
+// }
+
+// @keyframes loader-inner {
+//   0% {
+//     height: 0%;
+//   }
+  
+//   25% {
+//     height: 0%;
+//   }
+  
+//   50% {
+//     height: 100%;
+//   }
+  
+//   75% {
+//     height: 100%;
+//   }
+  
+//   100% {
+//     height: 0%;
+//   }
+// }

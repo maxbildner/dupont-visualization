@@ -6,12 +6,19 @@ import {
 import allStockData from './stock_data.json';
 import { parseStockData } from './process';
 import { getStock } from './api';
+import { 
+    showLoadingAnimation, 
+    hideLoading,
+    isValid } from './loading';
 import "./styles/app.scss";
+
 
 
 function handleStockGet(e) {
     const stockSymbolEl = document.getElementById('stock-symbol');
     const stockSymbol = stockSymbolEl.value;            // ex. 'AAPL'
+
+    showLoadingAnimation();
 
     // DOESN'T WORK
     // 1
@@ -27,140 +34,62 @@ function handleStockGet(e) {
     // let data = getStock('AAPL');
     // console.log(data)
 
+    // d3.selectAll("svg").remove();
+    // let svg1 = document.createElement('svg')
+    // svg1.setAttribute("id", "rectangularareachart1");
+    // svg1.setAttribute("width", "400");
+    // svg1.setAttribute("height", "240");
+    // // width = "400" height = "240"
 
-    getStock(stockSymbol).then(
-        response => {                                     // response.datatable == {data: Array(8), columns: Array(111)}  
-        // ex. response.datatable.data[0][7] => assets for apple for 2018   
-        let data = parseStockData(response);     
-        renderAlbers(data);
-        // move all code below into function and call function here
-    })
+    // let svg2 = document.createElement('svg')
+    // svg2.setAttribute("id", "rectangularareachart2");
+    // svg2.setAttribute("width", "400");
+    // svg2.setAttribute("height", "240");
+    
+    // let svg3 = document.createElement('svg')
+    // svg3.setAttribute("id", "rectangularareachart3");
+    // svg3.setAttribute("width", "400");
+    // svg3.setAttribute("height", "240");
+    
+    // let svg4 = document.createElement('svg')
+    // svg4.setAttribute("id", "rectangularareachart4");
+    // svg4.setAttribute("width", "400");
+    // svg4.setAttribute("height", "240");
+    
+    // let div = document.getElementById('container')
+    // // debugger
 
-    // response.datatable.columns[0]
-        
+    // div.appendChild(svg1);
+    // div.appendChild(svg2);
+    // div.appendChild(svg3);
+    // div.appendChild(svg4);
+    // debugger
+
+    // const svg = document.getElement
+    // while (svg.lastChild) {
+    //     svg.removeChild(svg.lastChild);
+    // }
 
 
     
 
+    getStock(stockSymbol).then(
+        response => {                                     // response.datatable == {data: Array(8), columns: Array(111)}  
+        // ex. response.datatable.data[0][7] => assets for apple for 2018   
+        // debugger
+        hideLoading();
 
-    // // GET STOCK DATA (FOR TESTING- DATA IS HARD CODED)
-    // // const stockData = allStockData[stockSymbol];
-    // // if (!stockData) {											// if user types in stock not in free api
-    // //     console.log(`Stock ${stockSymbol} not found.`);
-    // //     return;
-    // // }
-    // // const data = parseStockData(stockData);						// not being used yet
-    // // ex. if AAPL, duPontData == { 
-    // // leverage: 3.4133013523477094, 
-    // // assetTurnover: 0.7262150522933899, 
-    // // operatingMargin: 0.26694026619477024, 
-    // // interestBurden: 1.0282800643177523, 
-    // // taxBurden: 0.8165781929413056 }
-    // // Tax Burden = 19.16       Interest Burden = % -2.12       
-    // // EBIT Margin = % -2.13    Asset Turnover = % 40.37 
-    // // Leverage = % 44.71 
-    // // each element represents the extent to which (out of all 5 ratios) that ratio contributed to the change in ROE
-    // let rawData = [19.16, 2.12, 2.13, 40.37, 44.71];              	// for now make postiive
-    // // var rawData = { time: 40, money: 90, food: 30, sleep: 60 };	// rawData MUST BE ARRAY NOT OBJ
+        if (isValid(response, stockSymbol)) {
+            let data = parseStockData(response);     
+            // d3.selectAll("svg").remove();       // BUGS
+            // d3.select("svg").empty();
+            renderAlbers(data);
+        } else {
+            alert('STOCK NOT FOUND');
+        }
+    })
 
-    // // let data1 = [ 
-    // // 	{ value: "42", label: "Tax Burden", valueSuffix: " %" }, 
-    // // 	{ value: "69", label: "Asset Turnover", valueSuffix: " %" }, 
-    // // 	{ value: "29", label: "EBIT Margin", valueSuffix: " %" }, 
-    // // 	{ value: "52", label: "Leverage", valueSuffix: " %" }
-    // // ];
-    // // let data1 = [ 
-    // // 	{ value: `${100*data.taxBurden}`, label: "Tax Burden", valueSuffix: " %" }, 
-    // // 	{ value: `${100*data.assetTurnover}`, label: "Asset Turnover", valueSuffix: " %" }, 
-    // // 	{ value: `${100*data.operatingMargin}`, label: "EBIT Margin", valueSuffix: " %" }, 
-    // // 	{ value: `${100*data.leverage}`, label: "Leverage", valueSuffix: " %" }
-    // // ];
-    // let data1 = [
-    //     { value: `${rawData[0]}`, label: "Tax Burden", valueSuffix: " %" },
-    //     { value: `${rawData[3]}`, label: "Asset Turnover", valueSuffix: " %" },
-    //     { value: `${rawData[2]}`, label: "EBIT Margin", valueSuffix: " %" },
-    //     { value: `${rawData[4]}`, label: "Leverage", valueSuffix: " %" },
-    //     // { value: `10`, label: "Interest Burden", valueSuffix: " %" }
-    // ];
-    // let config1 = rectangularAreaChartDefaultSettings();
-    // config1.expandFromLeft = false;
-    // config1.colorsScale = d3.scale.category20b();
-    // // // create custom colorScale function  DOESN"T WORK YET
-    // // config1.colorScale = d3.scale.ordinal()
-    // //     .range(["#9e0142", "#a00343", "#a20643", "#a40844", "#a70b44"])
-    // // doesn't work below (colorSCale)
-    // // config1.colorsScale = ["#9e0142", "#a00343", "#a20643", "#a40844", "#a70b44", "#a90d45", "#ab0f45", "#ad1245", "#af1446", "#b11646", "#b31947", "#b51b47", "#b71d48", "#ba2048", "#bc2248", "#be2449", "#c02749", "#c12949", "#c32b4a", "#c52d4a", "#c7304a", "#c9324a", "#cb344b", "#cd364b", "#ce384b", "#d03b4b", "#d23d4b", "#d33f4b", "#d5414b", "#d7434b", "#d8454b", "#da474a", "#db494a", "#dd4b4a", "#de4d4a", "#df4f4a", "#e1514a", "#e2534a", "#e35549", "#e45749", "#e65949", "#e75b49", "#e85d49", "#e95f49", "#ea6149", "#eb6349", "#ec6549", "#ed6749", "#ee6a49", "#ef6c49", "#f06e4a", "#f0704a", "#f1724a", "#f2744b", "#f3774b", "#f3794c", "#f47b4d", "#f47e4d", "#f5804e", "#f6824f", "#f68550", "#f78750", "#f78951", "#f88c52", "#f88e53", "#f89154", "#f99356", "#f99557", "#f99858", "#fa9a59", "#fa9c5a", "#fa9f5c", "#fba15d", "#fba35e", "#fba660", "#fba861", "#fcaa62", "#fcad64", "#fcaf65", "#fcb167", "#fcb368", "#fcb56a", "#fdb86b", "#fdba6d", "#fdbc6e", "#fdbe70", "#fdc071", "#fdc273", "#fdc474", "#fdc676", "#fdc878", "#fdca79", "#fecc7b", "#fecd7d", "#fecf7e", "#fed180", "#fed382", "#fed584", "#fed685", "#fed887", "#feda89", "#fedb8b", "#fedd8d", "#fede8f", "#fee090", "#fee192", "#fee394", "#fee496", "#fee698", "#fee79a", "#fee89b", "#feea9d", "#feeb9f", "#feeca1", "#feeda2", "#feefa4", "#fef0a5", "#fef1a7", "#fef2a8", "#fdf3a9", "#fdf3aa", "#fdf4ab", "#fdf5ac", "#fcf6ad", "#fcf6ae", "#fcf7af", "#fbf7af", "#fbf8b0", "#faf8b0", "#faf9b0", "#f9f9b0", "#f9f9b0", "#f8f9b0", "#f7faaf", "#f7faaf", "#f6faae", "#f5faae", "#f4f9ad", "#f3f9ac", "#f2f9ac", "#f2f9ab", "#f0f9aa", "#eff8a9", "#eef8a8", "#edf8a7", "#ecf7a7", "#ebf7a6", "#e9f6a5", "#e8f6a4", "#e7f5a3", "#e5f5a2", "#e4f4a2", "#e2f3a1", "#e0f3a1", "#dff2a0", "#ddf1a0", "#dbf19f", "#d9f09f", "#d7ef9f", "#d6ee9f", "#d4ee9f", "#d2ed9e", "#d0ec9e", "#cdeb9f", "#cbea9f", "#c9e99f", "#c7e89f", "#c5e89f", "#c3e79f", "#c0e6a0", "#bee5a0", "#bce4a0", "#b9e3a0", "#b7e2a1", "#b4e1a1", "#b2e0a1", "#b0dfa1", "#addea2", "#abdda2", "#a8dca2", "#a6dba3", "#a3daa3", "#a0d9a3", "#9ed8a3", "#9bd7a3", "#99d6a4", "#96d5a4", "#94d4a4", "#91d3a4", "#8ed1a4", "#8cd0a4", "#89cfa5", "#87cea5", "#84cda5", "#82cba5", "#7fcaa6", "#7dc9a6", "#7ac7a6", "#77c6a6", "#75c5a7", "#73c3a7", "#70c2a8", "#6ec0a8", "#6bbea8", "#69bda9", "#66bba9", "#64b9aa", "#62b8aa", "#60b6ab", "#5db4ac", "#5bb2ac", "#59b0ad", "#57aeae", "#55acae", "#53aaaf", "#51a8af", "#50a6b0", "#4ea4b1", "#4ca2b1", "#4ba0b2", "#499db2", "#489bb3", "#4799b3", "#4697b3", "#4595b4", "#4492b4", "#4390b4", "#438eb4", "#428cb5", "#4289b5", "#4287b4", "#4285b4", "#4283b4", "#4280b4", "#437eb3", "#437cb3", "#447ab3", "#4577b2", "#4575b1", "#4673b1", "#4771b0", "#486eaf", "#4a6caf", "#4b6aae", "#4c68ad", "#4e65ac", "#4f63ab", "#5161aa", "#525fa9", "#545ca8", "#555aa7", "#5758a6", "#5956a5", "#5b53a4", "#5c51a3", "#5e4fa2"];
-    // config1.maxValue = 100;
-    // loadRectangularAreaChart("rectangularareachart1", data1, config1);
-
-
-
-    // // let data2 = [
-    // //     { value: "78", label: "label2", valuePrefix: "Area of " }, 
-    // //     { value: "37", label: "Cras", valuePrefix: "Area of " }, 
-    // //     { value: "55", label: "elit sed consequat", valuePrefix: "Area of " }
-    // // ];
-    // let data2 = [
-    //     { value: `${rawData[0]}`, label: "Tax Burden" }, 
-    //     { value: `${rawData[3]}`, label: "Asset Turnover" }, 
-    //     { value: `${rawData[2]}`, label: "EBIT Margin" },
-    //     { value: `${rawData[4]}`, label: "Leverage" }
-    // ];
-    // let config2 = rectangularAreaChartDefaultSettings();
-    // // config2.colorsScale = d3.scale.ordinal().range(["#fc8d59", "#ffffbf", "#91bfdb"]); //palette from colorbrewer https://github.com/mbostock/d3/tree/master/lib/colorbrewer
-    // config2.colorsScale = d3.scale.ordinal().range(["#00441b", "#1b7837", "#5aae61", "#a6dba0"]); //palette from colorbrewer https://github.com/mbostock/d3/tree/master/lib/colorbrewer
-    // config2.textColorScale = d3.scale.ordinal().range(["#444", "#333", "#222"]);
-    // config2.labelAlignDiagonal = true;
-    // config2.valueTextAlignDiagonal = true;
-    // config2.valueTextPadding.right = 18;
-    // config2.maxValue = 100;
-    // // config2.animateDelay = 1000;
-    // config2.animateDelayBetweenBoxes = 0;
-    // config2.valueTextCountUp = false;
-    // loadRectangularAreaChart("rectangularareachart2", data2, config2);
-    // // ["#40004b", "#762a83", "#9970ab", "#c2a5cf", "#e7d4e8", "#f7f7f7", "#d9f0d3", "#a6dba0", "#5aae61", "#1b7837", "#00441b"]
-
-
-
-    // let data3 = [
-    //     { value: `${rawData[0]}`, label: "Tax Burden" }, 
-    //     { value: `${rawData[3]}`, label: "Asset Turnover" }, 
-    //     { value: `${rawData[2]}`, label: "EBIT Margin" }, 
-    //     { value: `${rawData[4]}`, label: "Leverage" } 
-    // ];
-    // let config3 = rectangularAreaChartDefaultSettings();
-    // config3.expandFromLeft = false;
-    // config3.expandFromTop = true;
-    // config3.maxValue = 100;
-    // config3.colorsScale = d3.scale.ordinal().range(["#fff7fb", "#ece2f0", "#d0d1e6", "#a6bddb", "#67a9cf", "#3690c0", "#02818a", "#016c59", "#014636"]);  //palette from colorbrewer https://github.com/mbostock/d3/tree/master/lib/colorbrewer
-    // config3.textColorScale = d3.scale.ordinal().range(["#555", "#777", "#999", "#aaa", "#ddd", "#fff", "#fff"]);
-    // // config3.animateDelay = 2000;
-    // loadRectangularAreaChart("rectangularareachart3", data3, config3);
-
-
-
-    // // let data4 = [
-    // //     { value: "32", label: "consectetuer adipiscing" }, 
-    // //     { value: "62", label: "ipsum" }
-    // // ];
-    // let data4 = [
-    //     { value: `${rawData[0]}`, label: "Tax Burden" },
-    //     { value: `${rawData[3]}`, label: "Asset Turnover" },
-    //     { value: `${rawData[2]}`, label: "EBIT Margin" },
-    //     { value: `${rawData[4]}`, label: "Leverage" }
-    // ];
-    // let config4 = rectangularAreaChartDefaultSettings();
-    // config4.expandFromLeft = true;
-    // config4.expandFromTop = true;
-    // config4.maxValue = 100;
-    // config4.labelAlignDiagonal = true;
-    // // config4.animateDelay = 3500;
-    // config4.displayValueText = false;
-    // config4.animateDelayBetweenBoxes = 0;
-    // // config4.colorsScale = d3.scale.ordinal().range(["#7570b3", "#e7298a", "#66a61e"]);  //palette from colorbrewer https://github.com/mbostock/d3/tree/master/lib/colorbrewer
-    // config4.colorsScale = d3.scale.ordinal().range(["#053061", "#2166ac", "#4393c3", "#92c5de"]);  //palette from https://observablehq.com/@d3/color-schemes
-    // config4.textColorScale = d3.scale.ordinal().range(["#e7298a", "#7570b3", "#66a61e"]);
-    // loadRectangularAreaChart("rectangularareachart4", data4, config4);
+    // response.datatable.columns[0]
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -169,6 +98,16 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
+
+
+    // < div align = "center" >
+    //     <div align="left" style="width: 810px;">
+    //         <svg id="rectangularareachart1" width="400" height="240"></svg><!-- --><svg id="rectangularareachart2" width="400" height="240"></svg>
+    //     </div>
+    //     <div align="left" style="width: 810px;">
+    //         <svg id="rectangularareachart3" width="400" height="240"></svg><!-- --><svg id="rectangularareachart4" width="400" height="240"></svg>
+    //     </div>
+    //     </div >
 
 
 

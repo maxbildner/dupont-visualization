@@ -73,6 +73,7 @@ export const loadRectangularAreaChart = (elementId, data, settings) => {
         .attr("class", "rectangularAreaChartText")
         .text("N");
     // debugger
+    // debugger
     var textHeight = dummyText.node().getBBox().height;
 
     // Sort the data so that boxes are drawn in the right order.

@@ -13,6 +13,7 @@ import {
 import "./styles/app.scss";
 
 
+
 function handleStockGet(e) {
     const stockSymbolEl = document.getElementById('stock-symbol');
     const stockSymbol = stockSymbolEl.value;            // ex. 'AAPL'
@@ -33,14 +34,55 @@ function handleStockGet(e) {
     // let data = getStock('AAPL');
     // console.log(data)
 
+    // d3.selectAll("svg").remove();
+    // let svg1 = document.createElement('svg')
+    // svg1.setAttribute("id", "rectangularareachart1");
+    // svg1.setAttribute("width", "400");
+    // svg1.setAttribute("height", "240");
+    // // width = "400" height = "240"
+
+    // let svg2 = document.createElement('svg')
+    // svg2.setAttribute("id", "rectangularareachart2");
+    // svg2.setAttribute("width", "400");
+    // svg2.setAttribute("height", "240");
+    
+    // let svg3 = document.createElement('svg')
+    // svg3.setAttribute("id", "rectangularareachart3");
+    // svg3.setAttribute("width", "400");
+    // svg3.setAttribute("height", "240");
+    
+    // let svg4 = document.createElement('svg')
+    // svg4.setAttribute("id", "rectangularareachart4");
+    // svg4.setAttribute("width", "400");
+    // svg4.setAttribute("height", "240");
+    
+    // let div = document.getElementById('container')
+    // debugger
+
+    // div.appendChild(svg1);
+    // div.appendChild(svg2);
+    // div.appendChild(svg3);
+    // div.appendChild(svg4);
+    // debugger
+
+    // const svg = document.getElement
+    // while (svg.lastChild) {
+    //     svg.removeChild(svg.lastChild);
+    // }
+
+
+    
+
     getStock(stockSymbol).then(
         response => {                                     // response.datatable == {data: Array(8), columns: Array(111)}  
         // ex. response.datatable.data[0][7] => assets for apple for 2018   
         // debugger
-
         hideLoading();
+
         if (isValid(response, stockSymbol)) {
             let data = parseStockData(response);     
+            // d3.selectAll("svg").remove();       // BUGS
+            // d3.select("svg").empty();
             renderAlbers(data);
         } else {
             alert('STOCK NOT FOUND');
@@ -57,6 +99,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+    // < div align = "center" >
+    //     <div align="left" style="width: 810px;">
+    //         <svg id="rectangularareachart1" width="400" height="240"></svg><!-- --><svg id="rectangularareachart2" width="400" height="240"></svg>
+    //     </div>
+    //     <div align="left" style="width: 810px;">
+    //         <svg id="rectangularareachart3" width="400" height="240"></svg><!-- --><svg id="rectangularareachart4" width="400" height="240"></svg>
+    //     </div>
+    //     </div >
 
 
 

@@ -1,7 +1,7 @@
 #loading-animation {
     // visibility: hidden;
     visibility: hidden;
-    color: red;
+    // color: red;
     width: 100px;
     height: 100px;
 
@@ -26,3 +26,80 @@
 #loading-animation.show {
     visibility: visible;
 }
+
+
+
+
+
+
+svg#rectangularareachart1, svg#rectangularareachart2 {
+    position: relative;
+    top: 4px;
+}
+
+
+
+
+// .loader {
+//   display: inline-block;
+//   width: 30px;
+//   height: 30px;
+//   position: relative;
+// //   border: 4px solid #Fff;
+//   border: 4px solid navy;
+//   top: 50%;
+//   animation: loader 2s infinite ease;
+// }
+
+// .loader-inner {
+//   vertical-align: top;
+//   display: inline-block;
+//   width: 100%;
+// //   background-color: #fff;
+//   background-color: navy;
+//   animation: loader-inner 2s infinite ease-in;
+// }
+
+// @keyframes loader {
+//   0% {
+//     transform: rotate(0deg);
+//   }
+  
+//   25% {
+//     transform: rotate(180deg);
+//   }
+  
+//   50% {
+//     transform: rotate(180deg);
+//   }
+  
+//   75% {
+//     transform: rotate(360deg);
+//   }
+  
+//   100% {
+//     transform: rotate(360deg);
+//   }
+// }
+
+// @keyframes loader-inner {
+//   0% {
+//     height: 0%;
+//   }
+  
+//   25% {
+//     height: 0%;
+//   }
+  
+//   50% {
+//     height: 100%;
+//   }
+  
+//   75% {
+//     height: 100%;
+//   }
+  
+//   100% {
+//     height: 0%;
+//   }
+// }

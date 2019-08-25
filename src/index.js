@@ -13,19 +13,11 @@ import {
 import "./styles/app.scss";
 
 
-function clearChart() {
-    // let svg1 = document.getElementById('rectangularareachart1');                //=> <svg>...</svg>
-    // let svg2 = document.getElementById('rectangularareachart2');                //=> <svg>...</svg>
-    // let svg3 = document.getElementById('rectangularareachart3');                //=> <svg>...</svg>
-    // let svg4 = document.getElementById('rectangularareachart4');                //=> <svg>...</svg>
-    // let svg1Children = svg1.childNodes;                                         //=> NodeList(6) [text, g, g, g, g, g]
 
-    // while (svg1.firstChild) {
-    //     svg1.removeChild(svg1.firstChild);
-    // }
 
-    let allSvgs = document.querySelectorAll('svg');     //=> [svg#rect1, svg#rect2, svg#rect3, svg#rect3]
-    allSvgs.forEach( (svg) => {
+function clearChart() {                                                         // removes all children nodes from all svg elements
+    let allSvgs = document.querySelectorAll('svg');                             //=> [svg#rect1, svg#rect2, svg#rect3, svg#rect3]
+    allSvgs.forEach((svg) => {                                                  // svg ==  <svg>...</svg>
         while (svg.firstChild) {
             svg.removeChild(svg.firstChild);
         }
@@ -33,69 +25,16 @@ function clearChart() {
 }
 
 
-function handleStockGet(e) {
-    const stockSymbolEl = document.getElementById('stock-symbol');              
-    const stockSymbol = stockSymbolEl.value;            // ex. 'AAPL'
+function handleStockGet(e) {                                                    // callback, clears old chart (if any) and renders new chart
+    const stockSymbolEl = document.getElementById('stock-symbol');              // grab button element
+    const stockSymbol = stockSymbolEl.value;                                    // grab input field value ex. 'AAPL'
 
     showLoadingAnimation();
-
     clearChart();
 
-    // DOESN'T WORK
-    // 1
-    // let data = await getStock('AAPL');  //=> {data: Array(8), columns: Array(111)}  
-    // 2
-    // let data = null;
-    // getStock('AAPL').then( result => {
-    //     debugger
-    //     // result.datatable.data[0][7];             //=> assets for 2018
-    //     // data = result;
-    // });
-    // 3
-    // let data = getStock('AAPL');
-    // console.log(data)
-
-    // d3.selectAll("svg").remove();
-    // let svg1 = document.createElement('svg')
-    // svg1.setAttribute("id", "rectangularareachart1");
-    // svg1.setAttribute("width", "400");
-    // svg1.setAttribute("height", "240");
-    // // width = "400" height = "240"
-
-    // let svg2 = document.createElement('svg')
-    // svg2.setAttribute("id", "rectangularareachart2");
-    // svg2.setAttribute("width", "400");
-    // svg2.setAttribute("height", "240");
-    
-    // let svg3 = document.createElement('svg')
-    // svg3.setAttribute("id", "rectangularareachart3");
-    // svg3.setAttribute("width", "400");
-    // svg3.setAttribute("height", "240");
-    
-    // let svg4 = document.createElement('svg')
-    // svg4.setAttribute("id", "rectangularareachart4");
-    // svg4.setAttribute("width", "400");
-    // svg4.setAttribute("height", "240");
-    
-    // let div = document.getElementById('container')
-    // // debugger
-
-    // div.appendChild(svg1);
-    // div.appendChild(svg2);
-    // div.appendChild(svg3);
-    // div.appendChild(svg4);
-    // debugger
-
-    // const svg = document.getElement
-    // while (svg.lastChild) {
-    //     svg.removeChild(svg.lastChild);
-    // }
-
-
-    
 
     getStock(stockSymbol).then(
-        response => {                                     // response.datatable == {data: Array(8), columns: Array(111)}  
+        response => {                                                            // response.datatable == {data: Array(8), columns: Array(111)}  
         // ex. response.datatable.data[0][7] => assets for apple for 2018   
         // debugger
         hideLoading();

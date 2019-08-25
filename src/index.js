@@ -13,12 +13,33 @@ import {
 import "./styles/app.scss";
 
 
+function clearChart() {
+    // let svg1 = document.getElementById('rectangularareachart1');                //=> <svg>...</svg>
+    // let svg2 = document.getElementById('rectangularareachart2');                //=> <svg>...</svg>
+    // let svg3 = document.getElementById('rectangularareachart3');                //=> <svg>...</svg>
+    // let svg4 = document.getElementById('rectangularareachart4');                //=> <svg>...</svg>
+    // let svg1Children = svg1.childNodes;                                         //=> NodeList(6) [text, g, g, g, g, g]
+
+    // while (svg1.firstChild) {
+    //     svg1.removeChild(svg1.firstChild);
+    // }
+
+    let allSvgs = document.querySelectorAll('svg');     //=> [svg#rect1, svg#rect2, svg#rect3, svg#rect3]
+    allSvgs.forEach( (svg) => {
+        while (svg.firstChild) {
+            svg.removeChild(svg.firstChild);
+        }
+    });
+}
+
 
 function handleStockGet(e) {
-    const stockSymbolEl = document.getElementById('stock-symbol');
+    const stockSymbolEl = document.getElementById('stock-symbol');              
     const stockSymbol = stockSymbolEl.value;            // ex. 'AAPL'
 
     showLoadingAnimation();
+
+    clearChart();
 
     // DOESN'T WORK
     // 1
@@ -93,8 +114,8 @@ function handleStockGet(e) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const getStockbtnEl = document.getElementById('get-stock');
-    getStockbtnEl.addEventListener('click', handleStockGet);
+    const getStockbtnEl = document.getElementById('get-stock');                 // Grab 'LOOKUP' button element
+    getStockbtnEl.addEventListener('click', handleStockGet);                    // Call handleStockGet when user Clicks 'LOOKUP' Button
 })
 
 

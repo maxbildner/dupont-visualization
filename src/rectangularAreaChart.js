@@ -336,7 +336,8 @@ export const renderAlbers = (data) => {
     ];
     let config1 = rectangularAreaChartDefaultSettings();
     config1.expandFromLeft = false;
-    config1.colorsScale = d3.scale.category20b();
+    // config1.colorsScale = d3.scale.category20b();        // OLD
+    config1.colorsScale = d3.scale.ordinal().range(["#053061", "#2166ac", "#4393c3", "#92c5de"]);  //palette from https://observablehq.com/@d3/color-schemes
     // // create custom colorScale function  DOESN"T WORK YET
     // config1.colorScale = d3.scale.ordinal()
     //     .range(["#9e0142", "#a00343", "#a20643", "#a40844", "#a70b44"])
@@ -350,8 +351,8 @@ export const renderAlbers = (data) => {
 
 
     let config2 = rectangularAreaChartDefaultSettings();
-    // config2.colorsScale = d3.scale.ordinal().range(["#fc8d59", "#ffffbf", "#91bfdb"]); //palette from colorbrewer https://github.com/mbostock/d3/tree/master/lib/colorbrewer
-    config2.colorsScale = d3.scale.ordinal().range(["#00441b", "#1b7837", "#5aae61", "#a6dba0"]); //palette from colorbrewer https://github.com/mbostock/d3/tree/master/lib/colorbrewer
+    // config2.colorsScale = d3.scale.ordinal().range(["#00441b", "#1b7837", "#5aae61", "#a6dba0"]); //palette from colorbrewer https://github.com/mbostock/d3/tree/master/lib/colorbrewer
+    config2.colorsScale = d3.scale.ordinal().range(["#053061", "#2166ac", "#4393c3", "#92c5de"]);  //palette from https://observablehq.com/@d3/color-schemes
     config2.textColorScale = d3.scale.ordinal().range(["#444", "#333", "#222"]);
     config2.labelAlignDiagonal = true;
     config2.valueTextAlignDiagonal = true;
@@ -369,7 +370,8 @@ export const renderAlbers = (data) => {
     config3.expandFromLeft = false;
     config3.expandFromTop = true;
     config3.maxValue = 100;
-    config3.colorsScale = d3.scale.ordinal().range(["#fff7fb", "#ece2f0", "#d0d1e6", "#a6bddb", "#67a9cf", "#3690c0", "#02818a", "#016c59", "#014636"]);  //palette from colorbrewer https://github.com/mbostock/d3/tree/master/lib/colorbrewer
+    // config3.colorsScale = d3.scale.ordinal().range(["#fff7fb", "#ece2f0", "#d0d1e6", "#a6bddb", "#67a9cf", "#3690c0", "#02818a", "#016c59", "#014636"]);  //palette from colorbrewer https://github.com/mbostock/d3/tree/master/lib/colorbrewer
+    config3.colorsScale = d3.scale.ordinal().range(["#053061", "#2166ac", "#4393c3", "#92c5de"]);  //palette from https://observablehq.com/@d3/color-schemes
     config3.textColorScale = d3.scale.ordinal().range(["#555", "#777", "#999", "#aaa", "#ddd", "#fff", "#fff"]);
     // config3.animateDelay = 2000;
     loadRectangularAreaChart("rectangularareachart3", data3, config3);

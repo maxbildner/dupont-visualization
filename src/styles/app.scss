@@ -1,2 +1,8 @@
 @import "./layout.scss";
 @import "./loading.scss";
+
+// Remove white gap inbetween top 2 squares and bottom 2 squares
+svg#rectangularareachart1, svg#rectangularareachart2 {
+    position: relative;
+    top: 4px;
+}

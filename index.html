@@ -15,15 +15,43 @@
         <label for="">Input Stock Ticker (ex. AAPL)</label>
         <input type="text" id="stock-symbol" onfocus="this.value=''">
         <button id="get-stock">LOOKUP</button>
-        <!-- <svg id="rectangularareachart1" width="400" height="240"></svg>
-        <svg id="rectangularareachart2" width="400" height="240"></svg> -->
 
-        <div id="loading-animation"></div>
-
-        <!-- <a href="./index.html">CLEAR PAGE</a> -->
-       
-
+        <!-- <div id="loading-animation"></div> -->
         <!-- <span class="loader"><span class="loader-inner"></span></span> -->
+
+        <div id="loading-animation">
+            <svg width="200" height="200" viewBox="0 0 100 100">
+                <polyline class="line-cornered stroke-still" points="0,0 100,0 100,100" stroke-width="10" fill="none"></polyline>
+                <polyline class="line-cornered stroke-still" points="0,0 0,100 100,100" stroke-width="10" fill="none"></polyline>
+                <polyline class="line-cornered stroke-animation" points="0,0 100,0 100,100" stroke-width="10" fill="none">
+                </polyline>
+                <polyline class="line-cornered stroke-animation" points="0,0 0,100 100,100" stroke-width="10" fill="none">
+                </polyline>
+            </svg>
+        </div>
+        
+        <!--
+        <svg id="loading-animation" width="200" height="200" viewBox="0 0 100 100">
+            <polyline class="line-cornered stroke-still" points="0,0 100,0 100,100" stroke-width="10" fill="none"></polyline>
+            <polyline class="line-cornered stroke-still" points="0,0 0,100 100,100" stroke-width="10" fill="none"></polyline>
+            <polyline class="line-cornered stroke-animation" points="0,0 100,0 100,100" stroke-width="10" fill="none">
+            </polyline>
+            <polyline class="line-cornered stroke-animation" points="0,0 0,100 100,100" stroke-width="10" fill="none">
+            </polyline>
+        </svg>
+        -->
+
+        <!-- DYNAMICALLY GENERATED DOESN'T WORK
+        <div id="loading-container">
+            <svg id="loading-animation" width="200" height="200" viewbox="0 0 100 100">
+                <polyline class="line-cornered stroke-still" points="0,0 100,0 100,100" stroke-width="10" fill="none"></polyline>
+                <polyline class="line-cornered stroke-still" points="0,0 0,100 100,100" stroke-width="10" fill="none"></polyline>
+                <polyline class="line-cornered stroke-animation" points="0,0 100,0 100,100" stroke-width="10" fill="none">
+                </polyline>
+                <polyline class="line-cornered stroke-animation" points="0,0 0,100 100,100" stroke-width="10" fill="none">
+                </polyline>
+            </svg>
+        </div> -->
         
         <div align="center">
             <div id="container" align="left" style="width: 810px;">

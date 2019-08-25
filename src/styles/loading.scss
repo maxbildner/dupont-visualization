@@ -1,105 +1,140 @@
+// #loading-animation {
+//     // visibility: hidden;
+//     visibility: hidden;
+//     // color: red;
+//     width: 100px;
+//     height: 100px;
+
+//     border: 5px solid grey;
+//     position: absolute;
+//     margin: 0 auto;
+
+//     border-top: 5px solid darkblue;
+//     border-radius: 100%;
+
+//     animation: spin 1s infinite linear;
+// }
+
+// @keyframes spin {
+//     from {
+//         transform: rotate(0deg);
+//     } to {
+//         transform: rotate(360deg);
+//     }
+// }
+
+
+
+
+
+// body {
+//   background: #282828;
+// }
+
+// CSS SQUARE LOADER FROM: https://codepen.io/GeoxCodes/pen/PBoQZa
+// https://freefrontend.com/css-loaders/
+// AUTHOR: ILYAS R
 #loading-animation {
-    // visibility: hidden;
     visibility: hidden;
-    // color: red;
-    width: 100px;
-    height: 100px;
-
-    border: 5px solid grey;
-    position: absolute;
-    margin: 0 auto;
-
-    border-top: 5px solid darkblue;
-    border-radius: 100%;
-
-    animation: spin 1s infinite linear;
-}
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    } to {
-        transform: rotate(360deg);
-    }
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /*   -webkit-transform: translate(-50%, -50%) rotate(45deg) scale(1); */
+    /*           transform: translate(-50%, -50%) rotate(45deg) scale(1); */
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 #loading-animation.show {
     visibility: visible;
 }
 
+.stroke-still {
+  stroke: #232323;
+}
 
+.stroke-animation {
+  -webkit-animation: stroke-spacing 1.2s ease-in, stroke-color 4.8s linear;
+          animation: stroke-spacing 1.2s ease-in, stroke-color 4.8s linear;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-delay: 0;
+          animation-delay: 0;
+  -webkit-animation-direction: normal;
+          animation-direction: normal;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-play-state: running;
+          animation-play-state: running;
+  -webkit-transform-origin: center center;
+          transform-origin: center center;
+}
 
+@-webkit-keyframes stroke-spacing {
+  0% {
+    stroke-dasharray: 0 200;
+  }
+  45% {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 200 200;
+  }
+  90% {
+    stroke-dashoffset: -200;
+    stroke-dasharray: 200 200;
+  }
+  100% {
+    stroke-dashoffset: -200;
+    stroke-dasharray: 200 200;
+  }
+}
 
+@keyframes stroke-spacing {
+  0% {
+    stroke-dasharray: 0 200;
+  }
+  45% {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 200 200;
+  }
+  90% {
+    stroke-dashoffset: -200;
+    stroke-dasharray: 200 200;
+  }
+  100% {
+    stroke-dashoffset: -200;
+    stroke-dasharray: 200 200;
+  }
+}
 
+@-webkit-keyframes stroke-color {
+  0%  { stroke: #3498DB; }
+  24% { stroke: #643232; }
+  25% { stroke: #327864; }
+  49% { stroke: #327864; }
+  50% { stroke: #32326e; }
+  74% { stroke: #32326e; }
+  75% { stroke: #78325a; }
+  99% { stroke: #78325a; }
+}
 
-svg#rectangularareachart1, svg#rectangularareachart2 {
-    position: relative;
-    top: 4px;
+@keyframes stroke-color {
+  0%  { stroke: #3498DB; }
+  24% { stroke: #643232; }
+  25% { stroke: #327864; }
+  49% { stroke: #327864; }
+  50% { stroke: #32326e; }
+  74% { stroke: #32326e; }
+  75% { stroke: #78325a; }
+  99% { stroke: #78325a; }
 }
 
 
 
 
-// .loader {
-//   display: inline-block;
-//   width: 30px;
-//   height: 30px;
-//   position: relative;
-// //   border: 4px solid #Fff;
-//   border: 4px solid navy;
-//   top: 50%;
-//   animation: loader 2s infinite ease;
-// }
 
-// .loader-inner {
-//   vertical-align: top;
-//   display: inline-block;
-//   width: 100%;
-// //   background-color: #fff;
-//   background-color: navy;
-//   animation: loader-inner 2s infinite ease-in;
-// }
 
-// @keyframes loader {
-//   0% {
-//     transform: rotate(0deg);
-//   }
-  
-//   25% {
-//     transform: rotate(180deg);
-//   }
-  
-//   50% {
-//     transform: rotate(180deg);
-//   }
-  
-//   75% {
-//     transform: rotate(360deg);
-//   }
-  
-//   100% {
-//     transform: rotate(360deg);
-//   }
-// }
 
-// @keyframes loader-inner {
-//   0% {
-//     height: 0%;
-//   }
-  
-//   25% {
-//     height: 0%;
-//   }
-  
-//   50% {
-//     height: 100%;
-//   }
-  
-//   75% {
-//     height: 100%;
-//   }
-  
-//   100% {
-//     height: 0%;
-//   }
-// }
+
+
+
+

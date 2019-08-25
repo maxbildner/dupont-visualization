@@ -16,7 +16,8 @@ import "./styles/app.scss";
 
 
 function clearChart() {                                                         // removes all children nodes from all svg elements
-    let allSvgs = document.querySelectorAll('svg');                             //=> [svg#rect1, svg#rect2, svg#rect3, svg#rect3]
+    // let allSvgs = document.querySelectorAll('svg');                          //=> [svg#rect1, svg#rect2, svg#rect3, svg#rect3]
+    let allSvgs = document.querySelectorAll("[id^=rectangular]");
     allSvgs.forEach((svg) => {                                                  // svg ==  <svg>...</svg>
         while (svg.firstChild) {
             svg.removeChild(svg.firstChild);
@@ -29,8 +30,8 @@ function handleStockGet(e) {                                                    
     const stockSymbolEl = document.getElementById('stock-symbol');              // grab button element
     const stockSymbol = stockSymbolEl.value;                                    // grab input field value ex. 'AAPL'
 
-    showLoadingAnimation();
     clearChart();
+    showLoadingAnimation();
 
 
     getStock(stockSymbol).then(

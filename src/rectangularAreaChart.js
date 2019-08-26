@@ -25,9 +25,10 @@ export const rectangularAreaChartDefaultSettings = () => {
         maxValue: -1, // The charts maximum value. If this value is greater than the largest value displayed on the chart, this will cause the largest chart value to take up less area than the maximum height and width of the chart.
         labelAlignDiagonal: false, // Aligns the category label text to the charts diagonal.
         valueTextAlignDiagonal: false, // Aligns the value text to the charts diagonal.
-        displayValueText: true, // Display the value text.
+        displayValueText: false, // Display the value text.
         valueTextPadding: { top: 0, bottom: 0, left: 3, right: 3 }, // Value text padding.
-        valueTextCountUp: true // Causes the value text to count up from 0 during the chart load animation.
+        valueTextCountUp: true, // Causes the value text to count up from 0 during the chart load animation.
+        displayLabelText: true,     // NEW ADDITION
     };
 }
 
@@ -184,6 +185,12 @@ export const loadRectangularAreaChart = (elementId, data, settings) => {
         labelStartOffset = labelEndOffset;
     }
 
+    
+    if (settings.displayLabelText) {                                            // Turn ON for bottom right box
+        // config4.displayLabelText = true;                                           
+        // config4.displayValueText = true;       
+    }
+
     // Add the category label text.
     var labelPath = boxGroup.append("text")
         .attr("class", "rectangularAreaChartText")
@@ -199,7 +206,12 @@ export const loadRectangularAreaChart = (elementId, data, settings) => {
         .attr("startOffset", labelStartOffset)
         .style("text-anchor", labelTextAnchor)
         .attr("xlink:href", function (d, i) { return "#" + elementId + "HozPath" + i; })
-        .text(function (d) { return d.label; });
+        .text(function (d) { 
+            if (settings.displayValueText) {
+                return d.label; 
+            }
+        });
+
     if (settings.animate && settings.labelAlignDiagonal == false) {
         labelPath.transition()
             .delay(function (d, i) { return settings.animateDelay + (settings.animateDelayBetweenBoxes * i); })
@@ -335,6 +347,8 @@ export const renderAlbers = (data) => {
     	{ value: `${100*data.leverage}`, label: "Leverage", valueSuffix: " %" }
     ];
     let config1 = rectangularAreaChartDefaultSettings();
+    config1.displayLabelText = true;                                           // Turn off for top left box
+    config1.displayValueText = true,                                           // Turn off for top left box
     config1.expandFromLeft = false;
     // config1.colorsScale = d3.scale.category20b();        // OLD
     config1.colorsScale = d3.scale.ordinal().range(["#053061", "#2166ac", "#4393c3", "#92c5de"]);  //palette from https://observablehq.com/@d3/color-schemes
@@ -351,7 +365,9 @@ export const renderAlbers = (data) => {
 
 
     let config2 = rectangularAreaChartDefaultSettings();
-    // config2.colorsScale = d3.scale.ordinal().range(["#00441b", "#1b7837", "#5aae61", "#a6dba0"]); //palette from colorbrewer https://github.com/mbostock/d3/tree/master/lib/colorbrewer
+    // Overwrite default configuration settings
+    config2.displayLabelText = false;                                           // Turn off for top right box
+    config2.displayValueText = false,                                           // Turn off for top right box
     config2.colorsScale = d3.scale.ordinal().range(["#053061", "#2166ac", "#4393c3", "#92c5de"]);  //palette from https://observablehq.com/@d3/color-schemes
     config2.textColorScale = d3.scale.ordinal().range(["#444", "#333", "#222"]);
     config2.labelAlignDiagonal = true;
@@ -367,6 +383,8 @@ export const renderAlbers = (data) => {
 
 
     let config3 = rectangularAreaChartDefaultSettings();
+    config3.displayLabelText = false;                                           // Turn off for bottom left box
+    config3.displayValueText = false,                                           // Turn off for bottom left box
     config3.expandFromLeft = false;
     config3.expandFromTop = true;
     config3.maxValue = 100;
@@ -378,12 +396,13 @@ export const renderAlbers = (data) => {
 
 
     let config4 = rectangularAreaChartDefaultSettings();
+    config4.displayLabelText = false;                                           // Turn ON for bottom right box
+    config4.displayValueText = false,                                           // Turn ON for bottom right box
     config4.expandFromLeft = true;
     config4.expandFromTop = true;
     config4.maxValue = 100;
     config4.labelAlignDiagonal = true;
     // config4.animateDelay = 3500;
-    config4.displayValueText = false;
     config4.animateDelayBetweenBoxes = 0;
     // config4.colorsScale = d3.scale.ordinal().range(["#7570b3", "#e7298a", "#66a61e"]);  //palette from colorbrewer https://github.com/mbostock/d3/tree/master/lib/colorbrewer
     config4.colorsScale = d3.scale.ordinal().range(["#053061", "#2166ac", "#4393c3", "#92c5de"]);  //palette from https://observablehq.com/@d3/color-schemes

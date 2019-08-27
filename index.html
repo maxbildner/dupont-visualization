@@ -13,13 +13,11 @@
     <div id="app">
         <h3>Accounting Data Visualizer</h3>
 
-        <!-- <form action="" autocomplete="off"></form> -->
-
-        <label for="">Input Stock Ticker (ex. AAPL)</label>
-        <input autocomplete="off" type="text" id="stock-symbol" onfocus="this.value=''">
-        <button id="get-stock">LOOKUP</button>
-
-        <!-- OLD Circle loading animation <div id="loading-animation"></div> -->
+        <div style="width:300px;">
+            <label for="">Input Stock Ticker (ex. AAPL)</label>
+            <input class="autocomplete" type="text" id="stock-symbol" onfocus="this.value=''">
+            <button id="get-stock">LOOKUP</button>
+        </div>
 
         <div id="loading-animation">
             <svg width="200" height="200" viewBox="0 0 100 100">
@@ -32,18 +30,6 @@
             </svg>
         </div>
         
-
-        <!-- DYNAMICALLY GENERATED DOESN'T WORK
-        <div id="loading-container">
-            <svg id="loading-animation" width="200" height="200" viewbox="0 0 100 100">
-                <polyline class="line-cornered stroke-still" points="0,0 100,0 100,100" stroke-width="10" fill="none"></polyline>
-                <polyline class="line-cornered stroke-still" points="0,0 0,100 100,100" stroke-width="10" fill="none"></polyline>
-                <polyline class="line-cornered stroke-animation" points="0,0 100,0 100,100" stroke-width="10" fill="none">
-                </polyline>
-                <polyline class="line-cornered stroke-animation" points="0,0 0,100 100,100" stroke-width="10" fill="none">
-                </polyline>
-            </svg>
-        </div> -->
         
         <div align="center">
             <div id="container" align="left" style="width: 810px;">

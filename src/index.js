@@ -10,12 +10,8 @@ import {
     showLoadingAnimation, 
     hideLoading,
     isValid } from './loading';
-import { 
-    autocompleteSearch,
-    handleStockSearch,
-    handleStockKeyDown,
-    closeDropDownList,
-} from './search_stock';
+import { autocompleteSearchBar } from './search_stock';
+import { STOCK_SAMPLE_TICKERS } from './stock_sample_data';
 import "./styles/app.scss";
 
 
@@ -62,11 +58,9 @@ function handleStockGet(e) {                                                    
 document.addEventListener('DOMContentLoaded', () => {
     const getStockbtnEl = document.getElementById('get-stock');                 // Grab 'LOOKUP' button element
     getStockbtnEl.addEventListener('click', handleStockGet);                    // Call handleStockGet when user Clicks 'LOOKUP' Button
+    
     const stockSymbolEl = document.getElementById('stock-symbol');              // grab input field element
-    autocompleteSearch(stockSymbolEl);
-    document.addEventListener('click', (e) => {
-        return closeDropDownList(e.target, stockSymbolEl);
-    });
+    autocompleteSearchBar(stockSymbolEl, STOCK_SAMPLE_TICKERS);
 })
 
 

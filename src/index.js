@@ -10,6 +10,12 @@ import {
     showLoadingAnimation, 
     hideLoading,
     isValid } from './loading';
+import { 
+    autocompleteSearch,
+    handleStockSearch,
+    handleStockKeyDown,
+    closeDropDownList,
+} from './search_stock';
 import "./styles/app.scss";
 
 
@@ -27,7 +33,7 @@ function clearChart() {                                                         
 
 
 function handleStockGet(e) {                                                    // callback, clears old chart (if any) and renders new chart
-    const stockSymbolEl = document.getElementById('stock-symbol');              // grab button element
+    const stockSymbolEl = document.getElementById('stock-symbol');              // grab input field element
     const stockSymbol = stockSymbolEl.value;                                    // grab input field value ex. 'AAPL'
 
     clearChart();
@@ -56,19 +62,13 @@ function handleStockGet(e) {                                                    
 document.addEventListener('DOMContentLoaded', () => {
     const getStockbtnEl = document.getElementById('get-stock');                 // Grab 'LOOKUP' button element
     getStockbtnEl.addEventListener('click', handleStockGet);                    // Call handleStockGet when user Clicks 'LOOKUP' Button
+    const stockSymbolEl = document.getElementById('stock-symbol');              // grab input field element
+    autocompleteSearch(stockSymbolEl);
+    document.addEventListener('click', (e) => {
+        return closeDropDownList(e.target, stockSymbolEl);
+    });
 })
 
-
-
-
-    // < div align = "center" >
-    //     <div align="left" style="width: 810px;">
-    //         <svg id="rectangularareachart1" width="400" height="240"></svg><!-- --><svg id="rectangularareachart2" width="400" height="240"></svg>
-    //     </div>
-    //     <div align="left" style="width: 810px;">
-    //         <svg id="rectangularareachart3" width="400" height="240"></svg><!-- --><svg id="rectangularareachart4" width="400" height="240"></svg>
-    //     </div>
-    //     </div >
 
 
 

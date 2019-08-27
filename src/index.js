@@ -1,9 +1,4 @@
-import {       
-    rectangularAreaChartDefaultSettings,
-    loadRectangularAreaChart,
-    renderAlbers
-} from './rectangularAreaChart';
-import allStockData from './stock_data.json';
+import { renderAlbers } from './rectangularAreaChart';
 import { parseStockData } from './process';
 import { getStock } from './api';
 import { 
@@ -11,7 +6,8 @@ import {
     hideLoading,
     isValid } from './loading';
 import { autocompleteSearchBar } from './search_stock';
-import { STOCK_SAMPLE_TICKERS } from './stock_sample_data';
+// import { STOCK_SAMPLE_TICKERS } from './stock_sample_data';
+import { TICKERS } from './stock_tickers_full';
 import "./styles/app.scss";
 
 
@@ -44,15 +40,11 @@ function handleStockGet(e) {                                                    
 
         if (isValid(response, stockSymbol)) {
             let data = parseStockData(response);     
-            // d3.selectAll("svg").remove();       // BUGS
-            // d3.select("svg").empty();
             renderAlbers(data);
         } else {
             alert('STOCK NOT FOUND');
         }
     })
-
-    // response.datatable.columns[0]
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -60,7 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
     getStockbtnEl.addEventListener('click', handleStockGet);                    // Call handleStockGet when user Clicks 'LOOKUP' Button
     
     const stockSymbolEl = document.getElementById('stock-symbol');              // grab input field element
-    autocompleteSearchBar(stockSymbolEl, STOCK_SAMPLE_TICKERS);
+    // autocompleteSearchBar(stockSymbolEl, STOCK_SAMPLE_TICKERS);
+    autocompleteSearchBar(stockSymbolEl, TICKERS);
 })
 
 

@@ -54,6 +54,9 @@ export function autocompleteSearchBar(stockSymbolEl, STOCK_SAMPLE_TICKERS) {
                     closeDropDownList();
                 });
 
+                // debugger
+                // stop appending if list container becomes too long
+                if (container.childElementCount > 15) break;
                 // Attach stock item div to container
                 container.appendChild(stockItem);
             }

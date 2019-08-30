@@ -1,4 +1,4 @@
-const names = [
+export const NAMES = [
 "9F Inc",
 "Thunder Bridge Acquisition II LTD",
 "Vericity Inc",

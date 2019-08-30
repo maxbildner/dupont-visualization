@@ -17,7 +17,6 @@ import "./styles/app.scss";
 
 
 function clearChart() {                                                         // removes all children nodes from all svg elements
-    // let allSvgs = document.querySelectorAll('svg');                          //=> [svg#rect1, svg#rect2, svg#rect3, svg#rect3]
     let allSvgs = document.querySelectorAll("[id^=rectangular]");
     allSvgs.forEach((svg) => {                                                  // svg ==  <svg>...</svg>
         while (svg.firstChild) {
@@ -34,29 +33,15 @@ function handleStockGet(e) {                                                    
     clearChart();
     showLoadingAnimation();
 
-
     getStock(stockSymbol).then(
         response => {                                                            // response.datatable == {data: Array(8), columns: Array(111)}  
         // ex. response.datatable.data[0][7] => assets for apple for 2018   
-        // debugger
-        
-        // hideLoading();
-
-        // if (isValid(response, stockSymbol)) {
-        //     let data = parseStockData(response);     
-        //     renderAlbers(data);
-        // } else {
-        //     alert('STOCK NOT FOUND');
-        // }
-
-
         window.setTimeout( ()=> {
             hideLoading();
             if (isValid(response, stockSymbol)) {
                 let data = parseStockData(response);     
                 renderAlbers(data);
             } else {
-                // alert('STOCK NOT FOUND');       // Replace w/ actual DOM element that appears on screen
                 displayStockNotFound();
             }
         }, 3000);
@@ -64,13 +49,14 @@ function handleStockGet(e) {                                                    
     })
 }
 
+
 document.addEventListener('DOMContentLoaded', () => {
     const getStockbtnEl = document.getElementById('get-stock');                 // Grab 'LOOKUP' button element
     getStockbtnEl.addEventListener('click', handleStockGet);                    // Call handleStockGet when user Clicks 'LOOKUP' Button
     
     const stockSymbolEl = document.getElementById('stock-symbol');              // grab input field element
+    
     // when user clicks on input field, remove stockNotFound element (if exists)
-    // stockSymbolEl.addEventListener('onfocus', removeStockNotFound);      // DOESN"T WORK (DELETES NOT FOUND ELE? all the time)
     stockSymbolEl.addEventListener('click', removeStockNotFound);
 
     // autocompleteSearchBar(stockSymbolEl, STOCK_SAMPLE_TICKERS);

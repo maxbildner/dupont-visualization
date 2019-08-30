@@ -1,7 +1,9 @@
+import { NAMES } from './stock_names_full';
+
 // FROM TUTORIAL: https://www.w3schools.com/howto/howto_js_autocomplete.asp
-export function autocompleteSearchBar(stockSymbolEl, STOCK_SAMPLE_TICKERS) {
+export function autocompleteSearchBar(stockSymbolEl, STOCK_TICKERS) {
 	// stockSymbolEl        == input field element ex. <input class="autocomplete" type="text" id="stock-symbol" onfocus="this.value=''">
-	// STOCK_SAMPLE_TICKERS == array of strings valid stocks 
+	// STOCK_TICKERS == array of strings valid stocks 
 	
 	let currentSelection;
 
@@ -29,21 +31,33 @@ export function autocompleteSearchBar(stockSymbolEl, STOCK_SAMPLE_TICKERS) {
 		// Append the container element to the wrapper/section on the document
 		this.parentNode.appendChild(container);
 
-		// Search Algo: O(n) loop through each ticker in array
-		for (let i = 0; i < STOCK_SAMPLE_TICKERS.length; i++) {
-			let ticker = STOCK_SAMPLE_TICKERS[i];
-			
+		// Search Algo: O(n) loop through each ticker in array (and simultaneously loop through NAMES array)
+		for (let i = 0; i < STOCK_TICKERS.length; i++) {
+			let ticker = STOCK_TICKERS[i];
+			let name = NAMES[i];
+
 			// Check if ticker string starts w/ same characters as the users input field
-			if (ticker.substr(0, value.length).toUpperCase() == value.toUpperCase()) {
+			let inputMatchesTicker = ticker.substr(0, value.length).toUpperCase() == value.toUpperCase();
+			let inputMatchesName = name.substr(0, value.length).toUpperCase() == value.toUpperCase();
+			
+			// if (ticker.substr(0, value.length).toUpperCase() == value.toUpperCase()) {
+			// if (inputMatchesTicker || inputMatchesName) {
+			if (inputMatchesTicker || inputMatchesName) {
 					
 				// Make a DIV element for each ticker that matches
 				stockItem = document.createElement("DIV");
+				
 				// Bold the character that matches
 				stockItem.innerHTML = "<strong>" + ticker.substr(0, value.length) + "</strong>";
-				// stockItem == <div><strong>A</strong>"APL"</div>
+				// stockItem == <div><strong>A</strong>
+				
 				// Add the rest of the ticker (letters not bolded)
 				stockItem.innerHTML += ticker.substr(value.length);
-				
+				// stockItem == <div><strong>A</strong>"APL"</div>
+
+				// Insert stock Name as another p element (inline)
+				stockItem.innerHTML += " " + "<p style='display: inline-block;margin:0 auto;'>" + name + "</p>";
+
 				// Add a hidden input field that'll have the full ticker value
 				stockItem.innerHTML += "<input type='hidden' value='" + ticker + "'>";
 				// stockItem == <div><strong>A</strong>"APL" <input type="hidden" value="AAPL"></div>

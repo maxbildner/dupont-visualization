@@ -36,14 +36,27 @@ function handleStockGet(e) {                                                    
         response => {                                                            // response.datatable == {data: Array(8), columns: Array(111)}  
         // ex. response.datatable.data[0][7] => assets for apple for 2018   
         // debugger
-        hideLoading();
+        
+        // hideLoading();
 
-        if (isValid(response, stockSymbol)) {
-            let data = parseStockData(response);     
-            renderAlbers(data);
-        } else {
-            alert('STOCK NOT FOUND');
-        }
+        // if (isValid(response, stockSymbol)) {
+        //     let data = parseStockData(response);     
+        //     renderAlbers(data);
+        // } else {
+        //     alert('STOCK NOT FOUND');
+        // }
+
+
+        window.setTimeout( ()=> {
+            hideLoading();
+            if (isValid(response, stockSymbol)) {
+                let data = parseStockData(response);     
+                renderAlbers(data);
+            } else {
+                alert('STOCK NOT FOUND');
+            }
+        }, 3000);
+
     })
 }
 

@@ -94,3 +94,26 @@ export function isValid(response, symbol) {
         return true;
     }
 }
+
+
+// Displays Stock Not Found to DOM
+export function displayStockNotFound() {
+    // grab lookup-input <div>
+    let inputDiv = document.getElementById('lookup-input');
+
+    // create <p> element w/ text 'Stock Not Found'
+    let notFoundEle = document.createElement('p');
+
+    // Populate content of not found element w/ string 'Stock not found'
+    notFoundEle.innerHTML = 'Stock Not Found';
+
+    // Add class to notFoundEle
+
+    // Append <p> element to lookup-input <div>
+    inputDiv.appendChild(notFoundEle);
+
+}
+
+export function removeStockNotFound() {
+
+}

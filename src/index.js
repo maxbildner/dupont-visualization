@@ -4,7 +4,9 @@ import { getStock } from './api';
 import { 
     showLoadingAnimation, 
     hideLoading,
-    isValid } from './loading';
+    isValid,
+    displayStockNotFound
+} from './loading';
 import { autocompleteSearchBar } from './search_stock';
 // import { STOCK_SAMPLE_TICKERS } from './stock_sample_data';
 import { TICKERS } from './stock_tickers_full';
@@ -53,7 +55,8 @@ function handleStockGet(e) {                                                    
                 let data = parseStockData(response);     
                 renderAlbers(data);
             } else {
-                alert('STOCK NOT FOUND');
+                // alert('STOCK NOT FOUND');       // Replace w/ actual DOM element that appears on screen
+                displayStockNotFound();
             }
         }, 3000);
 

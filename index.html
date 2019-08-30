@@ -13,10 +13,11 @@
     <div id="app">
         <h3>Accounting Data Visualizer</h3>
 
-        <div style="width:300px;">
+        <div id="lookup-input" style="width:300px;">
             <label for="">Input Stock Ticker (ex. AAPL)</label>
             <input class="autocomplete" type="text" id="stock-symbol" onfocus="this.value=''">
             <button id="get-stock">LOOKUP</button>
+            <!-- <p>Stock Not Found</p> -->
         </div>
 
         <div id="loading-animation">

@@ -5,7 +5,8 @@ import {
     showLoadingAnimation, 
     hideLoading,
     isValid,
-    displayStockNotFound
+    displayStockNotFound, 
+    removeStockNotFound
 } from './loading';
 import { autocompleteSearchBar } from './search_stock';
 // import { STOCK_SAMPLE_TICKERS } from './stock_sample_data';
@@ -68,6 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
     getStockbtnEl.addEventListener('click', handleStockGet);                    // Call handleStockGet when user Clicks 'LOOKUP' Button
     
     const stockSymbolEl = document.getElementById('stock-symbol');              // grab input field element
+    // when user clicks on input field, remove stockNotFound element (if exists)
+    // stockSymbolEl.addEventListener('onfocus', removeStockNotFound);      // DOESN"T WORK (DELETES NOT FOUND ELE? all the time)
+    stockSymbolEl.addEventListener('click', removeStockNotFound);
+
     // autocompleteSearchBar(stockSymbolEl, STOCK_SAMPLE_TICKERS);
     autocompleteSearchBar(stockSymbolEl, TICKERS);
 })

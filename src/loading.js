@@ -62,13 +62,13 @@
 
 // NEW LOADING ANIMATION
 export function showLoadingAnimation() {
-    const loading = document.getElementById('loading-animation');
-    loading.className = "show";
+	const loading = document.getElementById('loading-animation');
+	loading.className = "show";
 }
 
 export function hideLoading() {
-    const loading = document.getElementById('loading-animation');
-    loading.className = loading.className.replace("show", "")
+	const loading = document.getElementById('loading-animation');
+	loading.className = loading.className.replace("show", "")
 }
 
 
@@ -88,32 +88,43 @@ export function hideLoading() {
 
 
 export function isValid(response, symbol) {
-    if (response.datatable.data.length === 0) {     // if stock symbol doesn't exist
-        return false;
-    } else {
-        return true;
-    }
+	if (response.datatable.data.length === 0) {     // if stock symbol doesn't exist
+		return false;
+	} else {
+		return true;
+	}
 }
 
 
 // Displays Stock Not Found to DOM
 export function displayStockNotFound() {
-    // grab lookup-input <div>
-    let inputDiv = document.getElementById('lookup-input');
+	// grab lookup-input <div>
+	let inputDiv = document.getElementById('lookup-input');
 
-    // create <p> element w/ text 'Stock Not Found'
-    let notFoundEle = document.createElement('p');
+	// create <p> element w/ text 'Stock Not Found'
+	let notFoundEle = document.createElement('p');
 
-    // Populate content of not found element w/ string 'Stock not found'
-    notFoundEle.innerHTML = 'Stock Not Found';
+	// Populate content of not found element w/ string 'Stock not found'
+	notFoundEle.innerHTML = 'Stock Not Found';
 
-    // Add class to notFoundEle
+	// Add id to notFoundEle
+	notFoundEle.setAttribute('id', 'not-found');
 
-    // Append <p> element to lookup-input <div>
-    inputDiv.appendChild(notFoundEle);
+	// Append <p> element to lookup-input <div>
+	inputDiv.appendChild(notFoundEle);
 
 }
 
 export function removeStockNotFound() {
+	// when user clicks on input field box, notFoundElement is removed from DOM
 
+	// grab notFoundElement
+	let notFoundEle = document.getElementById('not-found');
+
+	// remove notFoundElement if it exists
+	if (notFoundEle) {
+		// grab parent element that contains notFoundElement
+		let inputDiv = document.getElementById('lookup-input');
+		inputDiv.removeChild(notFoundEle);
+	}
 }

@@ -1,5 +1,8 @@
 import { renderAlbers } from './rectangularAreaChart';
-import { parseStockData, displaySection2 } from './process';
+import { parseStockData, 
+    displaySection2, 
+    removeDisplaySection2
+} from './process';
 import { getStock } from './api';
 import { 
     showLoadingAnimation, 
@@ -31,6 +34,7 @@ function handleStockGet(e) {                                                    
     const stockSymbol = stockSymbolEl.value;                                    // grab input field value ex. 'AAPL'
 
     clearChart();
+    removeDisplaySection2();
     showLoadingAnimation();
 
     getStock(stockSymbol).then(

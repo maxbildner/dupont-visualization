@@ -1820,10 +1820,8 @@ export const displaySection2 =  (stockData) => {
 
     let increaseOrDecrease;
     (largestNum > 0) ? (increaseOrDecrease = 'increase') : increaseOrDecrease = 'decrease';
-        
-    debugger
     
-    let text = "The primary reason for the increase in ROE over 2018 is the ";
+    let text = "The primary reason for the " + increaseOrDecrease + " in ROE over 2018 is the ";
 
     // Grab section2 div (parent container)
     let container = document.getElementById('section-2');
@@ -1832,11 +1830,22 @@ export const displaySection2 =  (stockData) => {
     let displayDiv = document.createElement("DIV");
 
     // Make inner HTML content of child div
-    // stockItem.innerHTML = "<strong>" + ticker.substr(0, value.length) + "</strong>";
-    displayDiv.innerHTML = text + increaseOrDecrease + " in" + largestRatio;
+    displayDiv.innerHTML = text + increaseOrDecrease + " in " + largestRatio;
     displayDiv.className = "roe-cause";
 
     // Append new child div to section2 div
     container.appendChild(displayDiv);
+}
+
+
+export const removeDisplaySection2 = () => {
+    // grab element to remove
+    let displayDiv = document.getElementsByClassName('roe-cause')[0];
+    let parent = document.getElementById('section-2');
     debugger
+    
+    if (displayDiv) {   // if it exists
+        displayDiv.remove();     // doesn't work
+        // parent.removeChild(displayDiv);     
+    }
 }

@@ -1360,7 +1360,7 @@
 // };
 
 
-// old parsing function (get data from api directly, no pre-parsing)
+// OLD parsing function (get data from api directly, no pre-parsing)
 // export const parseStockData = (stockData) => {
 
 //     // 0 == most recently reported fiscal year (2018)
@@ -1788,10 +1788,55 @@ export const parseStockData = (stockData) => {          // 8 keys that refer to 
     }
 
     // debugger
-    // formattedData == {leverage: 0.463933027478709, assetTurnover: 0.4002680756696468, operatingMargin: -0.00525464861268168, interestBurden: -0.03337927195044271, taxBurden: 0.17443281741476854, …}
+    // formattedData == { leverage: 0.463933027478709, assetTurnover: 0.4002680756696468, operatingMargin: -0.00525464861268168, interestBurden: -0.03337927195044271, taxBurden: 0.17443281741476854, …}
 
     return formattedData;       // [123, 12, 312,123 123, ]
     // { leverage, assetTurnover, operatingMarign, ... }
 }
 
 
+
+// Renders middle section on DOM
+export const displaySection2 =  (stockData) => {
+    // stockData == { leverage: 0.463933027478709, assetTurnover: 0.4002680756696468, operatingMargin: 0.00525464861268168, interestBurden: 0.03337927195044271, taxBurden: 0.17443281741476854, …}
+    
+    let values = Object.values(stockData)
+    // values = [0.463933027478709, 0.4002680756696468, 0.00525464861268168, 0.03337927195044271, 0.17443281741476854, 0.5403336401320022]
+    
+    let roe = values[values.length - 1];
+    // roe = .54
+
+    // remove roe
+    values.pop();
+
+    // Find largest value in stockData object
+    let largestNum = Math.max(...values);
+    // largestNum = 0.463933027478709
+
+    let largestRatio = Object.keys(stockData).find( key => {
+        return stockData[key] === largestNum;
+    });
+    // largestRatio = "leverage"
+
+    let increaseOrDecrease;
+    (largestNum > 0) ? (increaseOrDecrease = 'increase') : increaseOrDecrease = 'decrease';
+        
+    debugger
+    
+    let text = "The primary reason for the increase in ROE over 2018 is the ";
+
+    // Grab section2 div (parent container)
+    let container = document.getElementById('section-2');
+
+    // Create new child div
+    let displayDiv = document.createElement("DIV");
+
+    // Make inner HTML content of child div
+    // stockItem.innerHTML = "<strong>" + ticker.substr(0, value.length) + "</strong>";
+    displayDiv.innerHTML = text + increaseOrDecrease + " in" + largestRatio;
+    displayDiv.className = "roe-cause";
+
+    // Append new child div to section2 div
+    container.appendChild(displayDiv);
+    debugger
+}

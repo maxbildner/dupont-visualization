@@ -1,5 +1,5 @@
 import { renderAlbers } from './rectangularAreaChart';
-import { parseStockData } from './process';
+import { parseStockData, displaySection2 } from './process';
 import { getStock } from './api';
 import { 
     showLoadingAnimation, 
@@ -39,12 +39,13 @@ function handleStockGet(e) {                                                    
         window.setTimeout( ()=> {
             hideLoading();
             if (isValid(response, stockSymbol)) {
-                let data = parseStockData(response);     
+                let data = parseStockData(response);                            // data = { leverage: 0.463933027478709, assetTurnover: 0.4002680756696468, operatingMargin: -0.00525464861268168, interestBurden: -0.03337927195044271, taxBurden: 0.17443281741476854, …}
                 renderAlbers(data);
+                displaySection2(data);                                          // render section 2 on DOM
             } else {
                 displayStockNotFound();
             }
-        }, 3000);
+        }, 2000);
 
     })
 }

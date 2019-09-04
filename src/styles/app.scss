@@ -1,9 +1,26 @@
-@import "./layout.scss";
 @import "./loading.scss";
 @import "./searchbar.scss";
+@import "./navbar.scss";
 
 // Remove white gap inbetween top 2 squares and bottom 2 squares
 svg#rectangularareachart1, svg#rectangularareachart2 {
     position: relative;
     top: 4px;
 }
+
+// RESET STUFF
+html, body, div, h1, h2, h3, p, a, ul, li {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+}
+
+
+h3 {
+  color: darkblue;
+  font-size: 1.9rem;
+  font-family: 'Times New Roman', Times, serif;
+}
+

@@ -1,44 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="./dist/main.css" />
-    <script src="https://d3js.org/d3.v3.min.js" language="JavaScript"></script>
-    <title>New JS Project</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<link rel="stylesheet" href="./dist/main.css" />
+	<script src="https://d3js.org/d3.v3.min.js" language="JavaScript"></script>
+	<title>Return On Equity Visualizer</title>
 </head>
 
 <body>
     <div id="app">
-        <h3>Accounting Data Visualizer</h3>
+			<div id="nav-bar">
+				<h3 id="nav-left">Return On Equity Visualizer</h3>
 
-        <div id="lookup-input" style="width:300px;">
-            <label for="">Input Stock Ticker (ex. AAPL)</label>
-            <input class="autocomplete" type="text" id="stock-symbol" onfocus="this.value=''">
-            <button id="get-stock">LOOKUP</button>
-            <!-- <p>Stock Not Found</p> -->
-        </div>
+				<div id="lookup-input" style="width:300px;">
+					<input class="autocomplete" type="text" id="stock-symbol" onfocus="this.value=''" placeholder="Search Company...">
+					<!-- <button id="get-stock">LOOKUP</button> -->
+					<input id="get-stock" type="image" src="./src/search-icon.png" alt="Lookup">
+				</div>
+			</div>
 
-        <div id="loading-animation">
-            <svg width="200" height="200" viewBox="0 0 100 100">
-                <polyline class="line-cornered stroke-still" points="0,0 100,0 100,100" stroke-width="10" fill="none"></polyline>
-                <polyline class="line-cornered stroke-still" points="0,0 0,100 100,100" stroke-width="10" fill="none"></polyline>
-                <polyline class="line-cornered stroke-animation" points="0,0 100,0 100,100" stroke-width="10" fill="none">
-                </polyline>
-                <polyline class="line-cornered stroke-animation" points="0,0 0,100 100,100" stroke-width="10" fill="none">
-                </polyline>
-            </svg>
-        </div>
-        
-        
-        <div align="center">
-            <div id="container" align="left" style="width: 810px;">
-                    <svg id="rectangularareachart1" width="400" height="240"></svg><!-- --><svg id="rectangularareachart2" width="400" height="240"></svg><!-- -->
-                    <svg id="rectangularareachart3" width="400" height="240"></svg><!-- --><svg id="rectangularareachart4" width="400" height="240"></svg><!-- -->
-            </div>
-        </div>
 
+			<div id="section-2">
+				<p>A visualization of ROE for publicly listed US firms, inspired by 
+					<a href="https://simple.wikipedia.org/wiki/Josef_Albers" target="_blank" id="albers-wiki">Josef Albers</a> paintings
+				</p>
+			</div>
+
+
+			<div id="section-3">
+				<div id="loading-animation">
+					<svg width="200" height="200" viewBox="0 0 100 100">
+						<polyline class="line-cornered stroke-still" points="0,0 100,0 100,100" stroke-width="10" fill="none"></polyline>
+						<polyline class="line-cornered stroke-still" points="0,0 0,100 100,100" stroke-width="10" fill="none"></polyline>
+						<polyline class="line-cornered stroke-animation" points="0,0 100,0 100,100" stroke-width="10" fill="none">
+						</polyline>
+						<polyline class="line-cornered stroke-animation" points="0,0 0,100 100,100" stroke-width="10" fill="none">
+						</polyline>
+					</svg>
+				</div>
+				
+				<div align="center">
+					<div id="container" align="left" style="width: 810px;">
+						<svg id="rectangularareachart1" width="400" height="240"></svg><!-- --><svg id="rectangularareachart2" width="400" height="240"></svg><!-- -->
+						<svg id="rectangularareachart3" width="400" height="240"></svg><!-- --><svg id="rectangularareachart4" width="400" height="240"></svg><!-- -->
+					</div>
+				</div>
+			</div>
+			
+	
     </div>
     <script src="./dist/main.js"></script>
 </body>

@@ -43,7 +43,7 @@ export function autocompleteSearchBar(stockSymbolEl, STOCK_TICKERS) {
 			// if (ticker.substr(0, value.length).toUpperCase() == value.toUpperCase()) {
 			// if (inputMatchesTicker || inputMatchesName) {
 			if (inputMatchesTicker || inputMatchesName) {
-					
+		   		
 				// Make a DIV element for each ticker that matches
 				stockItem = document.createElement("DIV");
 				

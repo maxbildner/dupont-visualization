@@ -1,0 +1,50 @@
+#nav-bar {
+  background:grey;
+  height: 5rem;
+  position: relative;
+  margin-top: 1rem;
+
+  // left nav section
+  #nav-left {
+    float: left;
+    margin-left: 3rem;
+
+    // vertically center element
+    top: 50%;
+    position: absolute;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+
+  // right nav section
+  #lookup-input {
+    margin-right: 3rem;
+    position: absolute;
+    right: 0%;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    background: pink;
+    height: 1.4rem;
+
+    // lookup button
+    #get-stock {
+      width: 1rem;
+      vertical-align: middle;
+    }
+
+    #stock-symbol {
+      width: 76%;
+    }
+  }
+  
+}
+
+#nav-bar #lookup-input #stock-symbol {
+  width: 76%;
+  border: 0;
+  height: 100%;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  border-bottom: 1px solid black;
+}

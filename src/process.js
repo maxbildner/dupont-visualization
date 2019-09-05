@@ -1842,7 +1842,7 @@ export const removeDisplaySection2 = () => {
     // grab element to remove
     let displayDiv = document.getElementsByClassName('roe-cause')[0];
     let parent = document.getElementById('section-2');
-    debugger
+    // debugger
     
     if (displayDiv) {   // if it exists
         displayDiv.remove();     // doesn't work

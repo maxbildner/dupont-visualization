@@ -144,4 +144,3 @@ export function autocompleteSearchBar(stockSymbolEl, STOCK_TICKERS) {
 		closeDropDownList(e.target);
 	});
 }
-
